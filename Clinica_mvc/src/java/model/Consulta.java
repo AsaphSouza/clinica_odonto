@@ -1,3 +1,4 @@
+//essa é a classe mais trabalhosa que tem até agora
 package model;
 
 import java.io.Serializable;
