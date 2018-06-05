@@ -1,4 +1,7 @@
-package model;
+package HibernateDAO;
+
+import DAO.DentistaDao;
+import Entidades.Dentista;
 
 
 public class HibernateDentistaDao implements DentistaDao {

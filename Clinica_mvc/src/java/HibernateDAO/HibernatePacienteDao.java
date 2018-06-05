@@ -1,4 +1,7 @@
-package model;
+package HibernateDAO;
+
+import DAO.PacienteDao;
+import Entidades.Paciente;
 
 public class HibernatePacienteDao implements PacienteDao {
 

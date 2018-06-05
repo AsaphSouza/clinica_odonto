@@ -1,4 +1,7 @@
-package model;
+package HibernateDAO;
+
+import DAO.ConsultaDao;
+import Entidades.Consulta;
 
 public class HibernateConsultaDao implements ConsultaDao {
 

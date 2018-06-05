@@ -1,5 +1,8 @@
 package model;
 
+import DAO.DAO;
+import HibernateDAO.HibernateConsultaDao;
+import Entidades.Consulta;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;

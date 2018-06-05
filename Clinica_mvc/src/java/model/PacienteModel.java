@@ -1,5 +1,6 @@
 package model;
 
+import Entidades.Paciente;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ public class PacienteModel {
 
 	private List<Paciente> lista;
 
-	public void marcarConsulta() {// as requisições que irão serem feitas no sistema deve ficar no "model"
+	public void marcarConsulta() {// as requisiï¿½ï¿½es que irï¿½o serem feitas no sistema deve ficar no "model"
 		// aqui marcarÃ¡ a consulta
 	}
 
@@ -30,7 +31,7 @@ public class PacienteModel {
 		if (p == null) {
 			lista.add(paciente);
 		} else {
-			throw new InvalidParameterException("Paciente já existe");
+			throw new InvalidParameterException("Paciente jï¿½ existe");
 		}
 
 	}
@@ -43,7 +44,7 @@ public class PacienteModel {
 			}
 		}
 
-		throw new InvalidParameterException("Paciente não existe");
+		throw new InvalidParameterException("Paciente nï¿½o existe");
 	}
 
 	public void deletarPaciente(Paciente p) {
@@ -55,7 +56,7 @@ public class PacienteModel {
 			}
 		}
 
-		throw new InvalidParameterException("Paciente não existe");
+		throw new InvalidParameterException("Paciente nï¿½o existe");
 	}
 
 	private Paciente pegar(Paciente p) {

@@ -1,5 +1,6 @@
 package model;
 
+import Entidades.Dentista;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DentistaModel {
 		if (d == null) {
 			lista.add(dentista);
 		} else {
-			throw new InvalidParameterException("Dentista já existe");
+			throw new InvalidParameterException("Dentista jï¿½ existe");
 		}
 
 	}
@@ -43,7 +44,7 @@ public class DentistaModel {
 			}
 		}
 
-		throw new InvalidParameterException("Dentista não existe");
+		throw new InvalidParameterException("Dentista nï¿½o existe");
 	}
 
 	public void deletarDentista(Dentista d) {
@@ -55,7 +56,7 @@ public class DentistaModel {
 			}
 		}
 
-		throw new InvalidParameterException("Dentista não existe");
+		throw new InvalidParameterException("Dentista nï¿½o existe");
 	}
 
 	private Dentista pegar(Dentista d) {

@@ -1,7 +1,12 @@
-package model;
+package Entidades;
 
+import Entidades.Pergunta;
+import Entidades.Medicamento;
+import Entidades.Doenca;
+import Entidades.Dentista;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -119,9 +124,7 @@ public class Resposta implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return Objects.hash(id,descricao,pergunta);
     }
 
     @Override

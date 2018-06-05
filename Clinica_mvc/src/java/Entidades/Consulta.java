@@ -1,9 +1,10 @@
-// sigo tentando o teste de upload do código.
-package model;
+package Entidades;
 
+import Entidades.Assistente;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -159,9 +160,7 @@ public class Consulta implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return Objects.hash(id, tipo, meio, data, dataMarcacao);
     }
 
     @Override

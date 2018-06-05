@@ -1,5 +1,7 @@
 package model;
 
+import Entidades.Recepcionista;
+import Entidades.Paciente;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class RecepcionistaModel {
 		if (r == null) {
 			lista.add(recepcionista);
 		} else {
-			throw new InvalidParameterException("Recepcionista já existe");
+			throw new InvalidParameterException("Recepcionista jï¿½ existe");
 		}
 
 	}
@@ -45,7 +47,7 @@ public class RecepcionistaModel {
 			}
 		}
 
-		throw new InvalidParameterException("Recepcionista não existe");
+		throw new InvalidParameterException("Recepcionista nï¿½o existe");
 	}
 
 	public void deletarRecepcionista(Recepcionista r) {
@@ -57,7 +59,7 @@ public class RecepcionistaModel {
 			}
 		}
 
-		throw new InvalidParameterException("Recepcionista não existe");
+		throw new InvalidParameterException("Recepcionista nï¿½o existe");
 	}
 
 	private Recepcionista pegar(Recepcionista r) {

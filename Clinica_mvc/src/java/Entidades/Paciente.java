@@ -1,8 +1,13 @@
-package model;
+package Entidades;
 
+import Entidades.Medicamento;
+import Entidades.Exame;
+import Entidades.Endereco;
+import Entidades.Consulta;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -179,9 +184,8 @@ public class Paciente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return Objects.hash(id, nome, telefone, dataNascimento, cpf, profissao, 
+                email, utilizaMedicamento);
     }
 
     @Override

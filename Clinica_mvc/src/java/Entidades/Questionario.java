@@ -1,8 +1,9 @@
-package model;
+package Entidades;
 
+import Entidades.Pergunta;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,39 +13,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "assistente")
-public class Assistente implements Serializable {
+@Table(name = "questionario")
+public class Questionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idAssistente", nullable = false)
+    @Column (name = "idQuestionario", nullable = false)
     private Long id;
     
     @Column(name = "nome", nullable = false)
     private String nome;
     
-    @Column(name = "formacao", nullable = false)
-    private String formacao;
+    @OneToMany(mappedBy = "questionario")
+    private List<Pergunta> perguntas;
+
+    public Questionario() {
+    }
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "assistente")
-    private List<Consulta> consultas;
-    
-    public Assistente() {
-    }
-
-    public List<Consulta> getConsultas() {
-        return consultas;
-    }
-
-    public void setConsultas(List<Consulta> consultas) {
-        this.consultas = consultas;
-    }
-
-    public Assistente(Long id, String nome, String formacao) {
+    public Questionario(Long id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.formacao = formacao;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public void setPerguntas(List<Pergunta> perguntas) {
+        this.perguntas = perguntas;
     }
 
     public String getNome() {
@@ -54,15 +51,7 @@ public class Assistente implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getFormacao() {
-        return formacao;
-    }
-
-    public void setFormacao(String formacao) {
-        this.formacao = formacao;
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -73,18 +62,16 @@ public class Assistente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return Objects.hash(id,nome);
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Assistente)) {
+        if (!(object instanceof Questionario)) {
             return false;
         }
-        Assistente other = (Assistente) object;
+        Questionario other = (Questionario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +80,7 @@ public class Assistente implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Assistentee[ id=" + id + " ]";
+        return "model.Questionario[ id=" + id + " ]";
     }
-
+    
 }

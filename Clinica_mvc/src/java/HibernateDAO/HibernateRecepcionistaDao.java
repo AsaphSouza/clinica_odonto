@@ -1,4 +1,7 @@
-package model;
+package HibernateDAO;
+
+import DAO.RecepcionistaDao;
+import Entidades.Recepcionista;
 
 public class HibernateRecepcionistaDao implements RecepcionistaDao {
 

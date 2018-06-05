@@ -1,7 +1,9 @@
-package model;
+package Entidades;
 
+import Entidades.Consulta;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -95,9 +97,7 @@ public class Dentista implements Serializable {
     
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (cro != null ? cro.hashCode() : 0);
-        return hash;
+        return Objects.hash(cro, nome, formacao);
     }
 
     @Override

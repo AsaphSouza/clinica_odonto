@@ -1,4 +1,6 @@
-package model;
+package DAO;
+
+import Entidades.Consulta;
 
 public interface ConsultaDao extends DAO<Consulta> {
 
