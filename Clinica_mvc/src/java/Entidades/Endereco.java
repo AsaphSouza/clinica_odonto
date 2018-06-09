@@ -1,26 +1,14 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name="endereco")
+@Embeddable
 public class Endereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "idEndereco", nullable = false)
-    private Long id;
     
     @Column(name = "cidade", nullable = false)
     private String cidade;
@@ -43,17 +31,12 @@ public class Endereco implements Serializable {
     @Column(name = "bairro")
     private String bairro;
     
-    @OneToMany(mappedBy = "endereco")
-    private List<Paciente> pacientes;
-
-  
-    
     public Endereco() {
     }
 
-    public Endereco(Long id, String cidade, String pais, String estado, String rua,
+    public Endereco(String cidade, String pais, String estado, String rua,
             String complemento, int numero, String bairro) {
-        this.id = id;
+        
         this.cidade = cidade;
         this.pais = pais;
         this.estado = estado;
@@ -63,13 +46,6 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
     
-    public List<Paciente> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
-    }
     public String getCidade() {
         return cidade;
     }
@@ -126,35 +102,49 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(id,cidade,pais,estado,rua,complemento,numero,bairro);
+        return Objects.hash(cidade,pais,estado,rua,complemento,numero,bairro);
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (!(object instanceof Endereco)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Endereco other = (Endereco) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Endereco endereco = (Endereco) obj;
+        if (this.numero != endereco.numero) {
+            return false;
+        }
+        if (!Objects.equals(this.cidade, endereco.cidade)) {
+            return false;
+        }
+        if (!Objects.equals(this.pais, endereco.pais)) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, endereco.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.rua, endereco.rua)) {
+            return false;
+        }
+        if (!Objects.equals(this.complemento, endereco.complemento)) {
+            return false;
+        }
+        return Objects.equals(this.bairro, endereco.bairro);
     }
 
     @Override
     public String toString() {
-        return "model.Enderecoo[ id=" + id + " ]";
+        return "Endereco{" + "cidade=" + cidade + ", pais=" + pais + ", estado=" 
+                + estado + ", rua=" + rua + ", complemento=" + complemento + ", numero=" 
+                + numero + ", bairro=" + bairro + '}';
     }
-
+    
 }

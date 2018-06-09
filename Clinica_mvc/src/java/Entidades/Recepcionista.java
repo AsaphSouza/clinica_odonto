@@ -1,7 +1,5 @@
 package Entidades;
 
-import Entidades.Exame;
-import Entidades.Consulta;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -90,21 +88,23 @@ public class Recepcionista implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (!(object instanceof Recepcionista)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Recepcionista other = (Recepcionista) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Recepcionista recepcionista = (Recepcionista) obj;
+        return Objects.equals(this.id, recepcionista.id);
     }
 
     @Override
     public String toString() {
-        return "model.Recepcionistaa[ id=" + id + " ]";
+        return "Recepcionista{" + "id=" + id + ", nome=" + nome + ", formacao=" + formacao + ", consultas=" + consultas + ", examesMarcados=" + examesMarcados + '}';
     }
 
 }

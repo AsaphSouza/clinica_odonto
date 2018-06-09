@@ -65,21 +65,26 @@ public class Doenca implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        
-        if (!(object instanceof Doenca)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Doenca other = (Doenca) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Doenca doenca = (Doenca) obj;
+        if (!Objects.equals(this.nome, doenca.nome)) {
+            return false;
+        }
+        return Objects.equals(this.id, doenca.id);
     }
 
     @Override
     public String toString() {
-        return "model.Doenca[ id=" + id + " ]";
+        return "Doenca{" + "id=" + id + ", nome=" + nome + ", respostas=" + respostas + '}';
     }
     
 }

@@ -2,39 +2,51 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "atestado")
 public class Atestado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAtestado", nullable = false)
     private Long id;
-
+    
+    @Column(name = "tipo")
     private String tipo;
+    
+    @Column(name = "descricao", nullable = false)
     private String descricao;
-    private Paciente paciente;
-
+    
+    @JoinColumn(name = "FK_CONSULTA", referencedColumnName = "idConsulta")
+    @ManyToOne
+    private Consulta consulta;
+    
     public Atestado() {
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Atestado(Long id, String tipo, String descricao, Paciente paciente) {
+    public Atestado(Long id, String tipo, String descricao, Consulta consulta) {
         this.id = id;
         this.tipo = tipo;
         this.descricao = descricao;
-        this.paciente = paciente;
+        this.consulta = consulta;
+    }
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     public String getTipo() {
@@ -67,20 +79,27 @@ public class Atestado implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Atestado)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Atestado other = (Atestado) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (!(Atestado.class == obj.getClass())) {
             return false;
         }
-        return true;
+        Atestado ats = (Atestado) obj;
+        if (!Objects.equals(this.tipo, ats.tipo)) {
+            return false;
+        }
+        return Objects.equals(this.id, ats.id);
     }
 
     @Override
     public String toString() {
-        return "model.Atestadoo[ id=" + id + " ]";
+        return "Atestado{" + "id=" + id + ", tipo=" + tipo + ", descricao=" 
+                + descricao + ", consulta=" + consulta + '}';
     }
-
+    
 }

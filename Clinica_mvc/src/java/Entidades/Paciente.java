@@ -1,15 +1,12 @@
 package Entidades;
 
-import Entidades.Medicamento;
-import Entidades.Exame;
-import Entidades.Endereco;
-import Entidades.Consulta;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -54,8 +50,7 @@ public class Paciente implements Serializable {
     @Column(name = "utilizaMedicamento")
     private boolean utilizaMedicamento;
     
-    @JoinColumn(name = "ENDERECO_FK", referencedColumnName = "idEndereco")
-    @ManyToOne(cascade = CascadeType.ALL)
+   @Embedded
     private Endereco endereco;
     
     @JoinTable (name = "paciente_utiliza_medicamento",
@@ -189,13 +184,21 @@ public class Paciente implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (!(object instanceof Paciente)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Paciente other = (Paciente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paciente paciente = (Paciente) obj;
+        if (!Objects.equals(this.cpf, paciente.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, paciente.id)) {
             return false;
         }
         return true;
@@ -203,7 +206,11 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Pacientee[ id=" + id + " ]";
+        return "Paciente{" + "id=" + id + ", nome=" + nome + ", telefone=" + telefone 
+                + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf + ", profissao=" 
+                + profissao + ", email=" + email + ", utilizaMedicamento=" + utilizaMedicamento 
+                + ", endereco=" + endereco + ", medicamentos=" + medicamentos + ", exames=" 
+                + exames + ", consultas=" + consultas + '}';
     }
 
 }

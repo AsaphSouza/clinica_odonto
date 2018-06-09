@@ -1,6 +1,5 @@
 package Entidades;
 
-import Entidades.Assistente;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -62,8 +62,17 @@ public class Consulta implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")})
     @ManyToMany
     private List<Medicamento> medicamentos;
+    
+    @OneToMany(mappedBy = "consulta")
+    private List<Exame> exames;
+    
+    
+    @OneToMany(mappedBy = "consulta")
+    private List<Atestado> atestados;
 
-    public Consulta(Long id, String tipo, String meio, Date data, Dentista dentista, Assistente assistente, Paciente paciente, Recepcionista recepcionista, Date dataMarcacao) {
+    public Consulta(Long id, String tipo, String meio, Date data, Dentista dentista,
+            Assistente assistente, Paciente paciente, Recepcionista recepcionista,
+            Date dataMarcacao) {
         this.id = id;
         this.tipo = tipo;
         this.meio = meio;
@@ -164,20 +173,30 @@ public class Consulta implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Consulta)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Consulta other = (Consulta) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        Consulta consul = (Consulta) obj;
+        if (!Objects.equals(this.id, consul.id)) {
+            return false;
+        }
+        return Objects.equals(this.data, consul.data);
     }
 
     @Override
     public String toString() {
-        return "model.Consultaa[ id=" + id + " ]";
+        return "Consulta{" + "id=" + id + ", tipo=" + tipo + ", meio=" + meio 
+                + ", data=" + data + ", dentista=" + dentista + ", assistente=" 
+                + assistente + ", paciente=" + paciente + ", recepcionista=" 
+                + recepcionista + ", dataMarcacao=" + dataMarcacao + ", medicamentos=" 
+                + medicamentos + ", exames=" + exames + ", atestados=" + atestados + '}';
     }
 
 }

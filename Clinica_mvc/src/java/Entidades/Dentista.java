@@ -1,6 +1,5 @@
 package Entidades;
 
-import Entidades.Consulta;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -101,13 +100,18 @@ public class Dentista implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dentista)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Dentista other = (Dentista) object;
-        if ((this.cro == null && other.cro != null) || (this.cro != null && !this.cro.equals(other.cro))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dentista dent = (Dentista) obj;
+        if (!Objects.equals(this.cro, dent.cro)) {
             return false;
         }
         return true;
@@ -115,7 +119,10 @@ public class Dentista implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Dentistaa[ id=" + cro + " ]";
+        return "Dentista{" + "cro=" + cro + ", nome=" + nome + ", formacao=" 
+                + formacao + ", consultas=" + consultas + ", perguntas=" + perguntas 
+                + ", respostas=" + respostas + '}';
     }
+
     
 }

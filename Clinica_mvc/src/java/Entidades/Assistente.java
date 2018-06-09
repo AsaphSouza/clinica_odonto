@@ -78,20 +78,23 @@ public class Assistente implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object ass) {
+        if (this == ass) {
             return true;
         }
-        if (!(o instanceof Assistente)) {
+        if (!(ass instanceof Assistente)) {
             return false;
         }
-        Assistente other = (Assistente) o;
-        return this.id == other.id;
+        Assistente other = (Assistente) ass;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "model.Assistentee[ id=" + id + " ]";
+        return "Assistente{" + "id=" + id + ", nome=" + nome + ", formacao=" + 
+                formacao + ", consultas=" + consultas + '}';
     }
+
+    
 
 }

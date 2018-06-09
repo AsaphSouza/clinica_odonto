@@ -124,21 +124,21 @@ public class Medicamento implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (!(object instanceof Medicamento)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Medicamento other = (Medicamento) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "model.Medicamentoo[ id=" + id + " ]";
+        final Medicamento medicamento = (Medicamento) obj;
+        if (!Objects.equals(this.nome, medicamento.nome)) {
+            return false;
+        }
+        return Objects.equals(this.id, medicamento.id);
     }
 
 }

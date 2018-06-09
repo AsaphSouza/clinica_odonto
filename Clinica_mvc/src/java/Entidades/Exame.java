@@ -39,9 +39,17 @@ public class Exame implements Serializable {
     @Column(name = "resultado")
     private String resultado;
     
-    @Column(name = "dataMarcacao")
+    @JoinColumn(name = "FK_CONSULTA", referencedColumnName = "idConsulta")
+    @ManyToOne
+    private Consulta consulta;
+    
+    @Column(name = "dataMarcacaoPaciente")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dataMarcacao;
+    private Date dataMarcacaoP;
+    
+    @Column(name = "dataMarcacaoRecepcionista")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataMarcacaoR;
     
     @JoinColumn(name = "FK_RECEPCIONISTA", referencedColumnName = "idRecepcionista")
     @ManyToOne
@@ -54,19 +62,24 @@ public class Exame implements Serializable {
     public Exame() {
     }
 
-    public Exame(Long id, String nome, String descricao, String status, 
-            Date tempoEstimado, String resultado, Date dataMarcacao, 
-            Recepcionista recepcionista, Paciente paciente) {
+    public Exame(Long id, String nome, String descricao, String status,
+            Date tempoEstimado, String resultado, Consulta consulta,
+            Date dataMarcacaoP, Date dataMarcacaoR, Recepcionista recepcionista,
+            Paciente paciente) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.status = status;
         this.tempoEstimado = tempoEstimado;
         this.resultado = resultado;
-        this.dataMarcacao = dataMarcacao;
+        this.consulta = consulta;
+        this.dataMarcacaoP = dataMarcacaoP;
+        this.dataMarcacaoR = dataMarcacaoR;
         this.recepcionista = recepcionista;
         this.paciente = paciente;
     }
+
+    
 
     public Date getTempoEstimado() {
         return tempoEstimado;
@@ -80,16 +93,32 @@ public class Exame implements Serializable {
         return resultado;
     }
 
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
+
+    public Date getDataMarcacaoP() {
+        return dataMarcacaoP;
+    }
+
+    public void setDataMarcacaoP(Date dataMarcacaoP) {
+        this.dataMarcacaoP = dataMarcacaoP;
+    }
+
+    public Date getDataMarcacaoR() {
+        return dataMarcacaoR;
+    }
+
+    public void setDataMarcacaoR(Date dataMarcacaoR) {
+        this.dataMarcacaoR = dataMarcacaoR;
+    }
+
     public void setResultado(String resultado) {
         this.resultado = resultado;
-    }
-
-    public Date getDataMarcacao() {
-        return dataMarcacao;
-    }
-
-    public void setDataMarcacao(Date dataMarcacao) {
-        this.dataMarcacao = dataMarcacao;
     }
 
     public Recepcionista getRecepcionista() {
@@ -142,26 +171,49 @@ public class Exame implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,nome,descricao,status,tempoEstimado,resultado,
-                dataMarcacao);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Objects.hashCode(this.descricao);
+        hash = 37 * hash + Objects.hashCode(this.status);
+        hash = 37 * hash + Objects.hashCode(this.tempoEstimado);
+        hash = 37 * hash + Objects.hashCode(this.resultado);
+        hash = 37 * hash + Objects.hashCode(this.consulta);
+        hash = 37 * hash + Objects.hashCode(this.dataMarcacaoP);
+        hash = 37 * hash + Objects.hashCode(this.dataMarcacaoR);
+        hash = 37 * hash + Objects.hashCode(this.recepcionista);
+        hash = 37 * hash + Objects.hashCode(this.paciente);
+        return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (!(object instanceof Exame)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Exame other = (Exame) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (Exame.class != obj.getClass()) {
             return false;
         }
-        return true;
+        
+        Exame ex = (Exame) obj;
+        return Objects.equals(this.id, ex.getId()); 
     }
 
     @Override
     public String toString() {
-        return "model.Exame[ id=" + id + " ]";
+        return "Exame{" + "id=" + id + ", nome=" + nome + ", descricao=" + 
+                descricao + ", status=" + status + ", tempoEstimado=" + 
+                tempoEstimado + ", resultado=" + resultado + ", consulta=" 
+                + consulta + ", dataMarcacaoP=" + dataMarcacaoP + ", dataMarcacaoR=" 
+                + dataMarcacaoR + ", recepcionista=" + recepcionista + ", paciente=" 
+                + paciente + '}';
     }
+
+    
+
+
 
 }

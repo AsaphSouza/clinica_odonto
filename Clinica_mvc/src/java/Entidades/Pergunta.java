@@ -1,6 +1,5 @@
 package Entidades;
 
-import Entidades.Dentista;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -104,21 +103,28 @@ public class Pergunta implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pergunta)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Pergunta other = (Pergunta) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Pergunta other = (Pergunta) obj;
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "model.Pergunta[ id=" + id + " ]";
+        return "Pergunta{" + "id=" + id + ", descricao=" + descricao + ", tipo=" 
+                + tipo + ", questionario=" + questionario + ", dentista=" + dentista 
+                + ", respostas=" + respostas + '}';
     }
     
 }
