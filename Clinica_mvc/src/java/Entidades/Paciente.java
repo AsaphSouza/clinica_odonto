@@ -57,7 +57,7 @@ public class Paciente implements Serializable {
             joinColumns = {@JoinColumn(name = "FK_PACIENTE", referencedColumnName = "idPaciente")},
             inverseJoinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")})
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Medicamento> medicamentos;
+    private List<Medicamento> listaMedicamentos;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     private List<Exame> exames;
@@ -97,13 +97,15 @@ public class Paciente implements Serializable {
         this.consultas = consultas;
     }
 
-    public List<Medicamento> getMedicamentos() {
-        return medicamentos;
+    public List<Medicamento> getListaMedicamentos() {
+        return listaMedicamentos;
     }
 
-    public void setMedicamentos(List<Medicamento> medicamentos) {
-        this.medicamentos = medicamentos;
+    public void setListaMedicamentos(List<Medicamento> listaMedicamentos) {
+        this.listaMedicamentos = listaMedicamentos;
     }
+
+    
 
     public String getNome() {
         return nome;
@@ -209,7 +211,7 @@ public class Paciente implements Serializable {
         return "Paciente{" + "id=" + id + ", nome=" + nome + ", telefone=" + telefone 
                 + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf + ", profissao=" 
                 + profissao + ", email=" + email + ", utilizaMedicamento=" + utilizaMedicamento 
-                + ", endereco=" + endereco + ", medicamentos=" + medicamentos + ", exames=" 
+                + ", endereco=" + endereco + ", medicamentos=" + listaMedicamentos + ", exames=" 
                 + exames + ", consultas=" + consultas + '}';
     }
 

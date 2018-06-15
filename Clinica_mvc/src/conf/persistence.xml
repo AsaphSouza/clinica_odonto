@@ -1,28 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="Clinica_mvcPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>Entidades.Assistente</class>
-    <class>Entidades.Atestado</class>
-    <class>Entidades.Consulta</class>
-    <class>Entidades.Dentista</class>
-    <class>Entidades.Doenca</class>
-    <class>Entidades.Endereco</class>
-    <class>Entidades.Exame</class>
-    <class>Entidades.Medicamento</class>
-    <class>Entidades.Paciente</class>
-    <class>Entidades.Pergunta</class>
-    <class>Entidades.Questionario</class>
-    <class>Entidades.Recepcionista</class>
-    <class>Entidades.Resposta</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/CLINICA_ODONTOLOGICA"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="asaph1605"/>
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-    </properties>
-  </persistence-unit>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+
+
+	<persistence-unit name="CLINICA_ODONTOLOGICA" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<properties>
+		
+			<!-- Configuring JDBC properties -->
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/CLINICA_ODONTOLOGICA" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="asaph1605" />
+        
+        	<!-- Hibernate properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.archive.autodetection" value="class, hbm" />
+			<property name="javax.persistence.sharedCache.mode" value="ALL"/>
+			<property name="hibernate.jdbc.batch_size" value="50"/>
+			<property name="hibernate.cache.user_query_cache" value="true"/>
+			<property name="hibernate.generate_statistics" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="none"/>
+						     		
+		</properties>
+
+	</persistence-unit>
+	
 </persistence>

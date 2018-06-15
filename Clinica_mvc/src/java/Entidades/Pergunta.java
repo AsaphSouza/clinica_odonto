@@ -33,7 +33,7 @@ public class Pergunta implements Serializable {
     @ManyToOne
     private Questionario questionario;
     
-    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "idDentista")
+    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
     @ManyToOne
     private Dentista dentista;
     

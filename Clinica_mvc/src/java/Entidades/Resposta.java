@@ -31,36 +31,34 @@ public class Resposta implements Serializable {
     @ManyToOne
     private Pergunta pergunta;
     
-    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "idDentista")
+    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
     @ManyToOne
     private Dentista dentista;
     
-    @JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")
+    //@JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")
     @JoinTable (name = "doenca_tem_resposta",
-            joinColumns = {@JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")})
+            joinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")})
     @ManyToMany
     private List<Doenca> doencas;
     
-    @JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")
-    @JoinTable (name = "medicamento_tem_resposta",
-            joinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")})
+    //@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")
+    @JoinTable(name = "medicamento_tem_resposta",
+            joinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")},
+            inverseJoinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")})
     @ManyToMany
     private List<Medicamento> medicamentos;
 
     public Resposta() {
     }
 
-    public Resposta(Long id, String descricao, Pergunta pergunta, Dentista dentista, 
-            List<Doenca> doencas, List<Medicamento> medicamentos) {
+    public Resposta(Long id, String descricao, Pergunta pergunta, Dentista dentista) {
         this.id = id;
         this.descricao = descricao;
         this.pergunta = pergunta;
         this.dentista = dentista;
-        this.doencas = doencas;
-        this.medicamentos = medicamentos;
     }
+
 
     public String getDescricao() {
         return descricao;

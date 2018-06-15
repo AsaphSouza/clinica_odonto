@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,15 +29,15 @@ public class Medicamento implements Serializable {
     private String via;
     
     @Column(name = "dose")
-    private String dose;
+    private float dose;
     
     @Column(name = "intervalo")
-    private String intervalo;
+    private int intervalo;
     
     @Column(name = "tempo_de_uso")
     private int tempoDeUso;
     
-    @ManyToMany(mappedBy = "medicamentos")
+    @ManyToMany(mappedBy = "listaMedicamentos")
     private List<Paciente> pacientes;
     
     @ManyToMany(mappedBy = "medicamentos")
@@ -53,7 +54,7 @@ public class Medicamento implements Serializable {
         this.respostas = respostas;
     }
 
-    public Medicamento(Long id, String nome, String via, String dose, String intervalo, int tempoDeUso) {
+    public Medicamento(Long id, String nome, String via, float dose, int intervalo, int tempoDeUso) {
         this.id = id;
         this.nome = nome;
         this.via = via;
@@ -86,19 +87,19 @@ public class Medicamento implements Serializable {
         this.via = via;
     }
 
-    public String getDose() {
+    public float getDose() {
         return dose;
     }
 
-    public void setDose(String dose) {
+    public void setDose(float dose) {
         this.dose = dose;
     }
 
-    public String getIntervalo() {
+    public int getIntervalo() {
         return intervalo;
     }
 
-    public void setIntervalo(String intervalo) {
+    public void setIntervalo(int intervalo) {
         this.intervalo = intervalo;
     }
 
