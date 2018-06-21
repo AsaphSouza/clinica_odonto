@@ -31,10 +31,13 @@ public class Paciente implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
     
+    @Column(name = "sexo", nullable = false)
+    private char sexo;
+    
     @Column(name = "telefone")
     private String telefone;
     
-    @Column(name = "dataNascimento", nullable = false)
+    @Column(name = "nascimento", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataNascimento;
     
@@ -47,7 +50,7 @@ public class Paciente implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @Column(name = "utilizaMedicamento")
+    @Column(name = "utilizamedicamento")
     private boolean utilizaMedicamento;
     
    @Embedded
@@ -68,10 +71,10 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
     
-    public Paciente(Long id, String nome, String telefone, Date dataNascimento, String cpf,
+    public Paciente(String nome, char sexo,String telefone, Date dataNascimento, String cpf,
             String profissao, String email, Endereco endereco, boolean utilizaMedicamento) {
-        this.id = id;
         this.nome = nome;
+        this.sexo = sexo;
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -79,6 +82,14 @@ public class Paciente implements Serializable {
         this.email = email;
         this.endereco = endereco;
         this.utilizaMedicamento = utilizaMedicamento;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
     }
 
     public List<Exame> getExames() {

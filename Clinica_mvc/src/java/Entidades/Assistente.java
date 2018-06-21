@@ -42,8 +42,7 @@ public class Assistente implements Serializable {
         this.consultas = consultas;
     }
 
-    public Assistente(Long id, String nome, String formacao) {
-        this.id = id;
+    public Assistente(String nome, String formacao) {
         this.nome = nome;
         this.formacao = formacao;
     }

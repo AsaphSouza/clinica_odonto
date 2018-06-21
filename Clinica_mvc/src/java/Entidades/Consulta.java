@@ -70,10 +70,9 @@ public class Consulta implements Serializable {
     @OneToMany(mappedBy = "consulta")
     private List<Atestado> atestados;
 
-    public Consulta(Long id, String tipo, String meio, Date data, Dentista dentista,
+    public Consulta(String tipo, String meio, Date data, Dentista dentista,
             Assistente assistente, Paciente paciente, Recepcionista recepcionista,
             Date dataMarcacao) {
-        this.id = id;
         this.tipo = tipo;
         this.meio = meio;
         this.data = data;

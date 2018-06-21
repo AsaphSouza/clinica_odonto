@@ -36,8 +36,7 @@ public class Recepcionista implements Serializable {
     public Recepcionista() {
     }
 
-    public Recepcionista(Long id, String nome, String formacao) {
-        this.id = id;
+    public Recepcionista(String nome, String formacao) {
         this.nome = nome;
         this.formacao = formacao;
     }

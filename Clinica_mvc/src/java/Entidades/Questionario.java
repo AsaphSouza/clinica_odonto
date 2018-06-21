@@ -30,8 +30,7 @@ public class Questionario implements Serializable {
     public Questionario() {
     }
     
-    public Questionario(Long id, String nome) {
-        this.id = id;
+    public Questionario(String nome) {
         this.nome = nome;
     }
 

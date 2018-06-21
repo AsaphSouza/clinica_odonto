@@ -7,9 +7,8 @@ import Entidades.Dentista;
 public class HibernateDentistaDao implements DentistaDao {
 
 	@Override
-	public void inserir(Dentista obj) {
-		// TODO Auto-generated method stub
-		
+	public void inserir(Dentista dentista) {
+            
 	}
 
 	@Override

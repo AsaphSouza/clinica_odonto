@@ -35,7 +35,7 @@ public class Pergunta implements Serializable {
     
     @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
     @ManyToOne
-    private Dentista dentista;
+    private Dentista dentistaa;
     
     @OneToMany(mappedBy = "pergunta")
     private List<Resposta> respostas;
@@ -43,11 +43,14 @@ public class Pergunta implements Serializable {
     public Pergunta() {
     }
 
-    public Pergunta(Long id, String descricao, String tipo) {
-        this.id = id;
+    public Pergunta(String descricao, String tipo, Questionario questionario, Dentista dentista) {
         this.descricao = descricao;
         this.tipo = tipo;
+        this.questionario = questionario;
+        this.dentistaa = dentista;
     }
+
+    
 
     public Questionario getQuestionario() {
         return questionario;
@@ -58,11 +61,11 @@ public class Pergunta implements Serializable {
     }
 
     public Dentista getDentista() {
-        return dentista;
+        return dentistaa;
     }
 
     public void setDentista(Dentista dentista) {
-        this.dentista = dentista;
+        this.dentistaa = dentista;
     }
 
     public List<Resposta> getRespostas() {
@@ -123,7 +126,7 @@ public class Pergunta implements Serializable {
     @Override
     public String toString() {
         return "Pergunta{" + "id=" + id + ", descricao=" + descricao + ", tipo=" 
-                + tipo + ", questionario=" + questionario + ", dentista=" + dentista 
+                + tipo + ", questionario=" + questionario + ", dentista=" + dentistaa 
                 + ", respostas=" + respostas + '}';
     }
     
