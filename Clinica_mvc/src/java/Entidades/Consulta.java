@@ -33,23 +33,23 @@ public class Consulta implements Serializable {
     @Column(name = "meio")
     private String meio;
     
-    @Column(name = "data", nullable = false)
+    @Column(name = "dataHora", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date data;
     
-    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
+    @JoinColumn(name = "cro", referencedColumnName = "cro")
     @ManyToOne
     private Dentista dentista;
     
-    @JoinColumn(name = "FK_ASSISTENTE", referencedColumnName = "idAssistente")
+    @JoinColumn(name = "idAssistente", referencedColumnName = "idAssistente")
     @ManyToOne
     private Assistente assistente;
     
-    @JoinColumn(name = "FK_PACIENTE", referencedColumnName = "idPaciente")
+    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
     @ManyToOne
     private Paciente paciente;
     
-    @JoinColumn(name = "FK_RECEPCIONISTA", referencedColumnName = "idRecepcionista")
+    @JoinColumn(name = "idRecepcionista", referencedColumnName = "idRecepcionista")
     @ManyToOne
     private Recepcionista recepcionista;
     
@@ -58,8 +58,8 @@ public class Consulta implements Serializable {
     private Date dataMarcacao;
     
     @JoinTable (name = "consulta_emissao_medicamento",
-            joinColumns = {@JoinColumn(name = "FK_CONSULTA", referencedColumnName = "idConsulta")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")})
+            joinColumns = {@JoinColumn(name = "idConsulta", referencedColumnName = "idConsulta")},
+            inverseJoinColumns = {@JoinColumn(name = "idMedicamento", referencedColumnName = "idMedicamento")})
     @ManyToMany
     private List<Medicamento> medicamentos;
     

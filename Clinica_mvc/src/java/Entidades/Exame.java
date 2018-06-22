@@ -39,7 +39,7 @@ public class Exame implements Serializable {
     @Column(name = "resultado")
     private String resultado;
     
-    @JoinColumn(name = "FK_CONSULTA", referencedColumnName = "idConsulta")
+    @JoinColumn(name = "idConsulta", referencedColumnName = "idConsulta")
     @ManyToOne
     private Consulta consulta;
     
@@ -51,11 +51,11 @@ public class Exame implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataMarcacaoR;
     
-    @JoinColumn(name = "FK_RECEPCIONISTA", referencedColumnName = "idRecepcionista")
+    @JoinColumn(name = "idRecepcionista", referencedColumnName = "idRecepcionista")
     @ManyToOne
     private Recepcionista recepcionista;
     
-    @JoinColumn(name = "FK_PACIENTE", referencedColumnName = "idPaciente")
+    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
     @ManyToOne
     private Paciente paciente;
 

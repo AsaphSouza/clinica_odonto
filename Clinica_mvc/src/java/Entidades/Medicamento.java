@@ -54,8 +54,7 @@ public class Medicamento implements Serializable {
         this.respostas = respostas;
     }
 
-    public Medicamento(Long id, String nome, String via, float dose, int intervalo, int tempoDeUso) {
-        this.id = id;
+    public Medicamento(String nome, String via, float dose, int intervalo, int tempoDeUso) {
         this.nome = nome;
         this.via = via;
         this.dose = dose;

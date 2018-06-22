@@ -27,7 +27,7 @@ public class Atestado implements Serializable {
     @Column(name = "descricao", nullable = false)
     private String descricao;
     
-    @JoinColumn(name = "FK_CONSULTA", referencedColumnName = "idConsulta")
+    @JoinColumn(name = "idConsulta", referencedColumnName = "idConsulta")
     @ManyToOne
     private Consulta consulta;
     

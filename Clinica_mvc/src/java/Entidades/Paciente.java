@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import model.CPF;
 
 @Entity
 @Table(name = "paciente")
@@ -42,7 +43,7 @@ public class Paciente implements Serializable {
     private Date dataNascimento;
     
     @Column(name = "cpf", nullable = false)
-    private String cpf;
+    private CPF cpf;
     
     @Column(name = "profissao")
     private String profissao;
@@ -71,7 +72,7 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
     
-    public Paciente(String nome, char sexo,String telefone, Date dataNascimento, String cpf,
+    public Paciente(String nome, char sexo,String telefone, Date dataNascimento, CPF cpf,
             String profissao, String email, Endereco endereco, boolean utilizaMedicamento) {
         this.nome = nome;
         this.sexo = sexo;
@@ -116,8 +117,6 @@ public class Paciente implements Serializable {
         this.listaMedicamentos = listaMedicamentos;
     }
 
-    
-
     public String getNome() {
         return nome;
     }
@@ -142,11 +141,11 @@ public class Paciente implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCpf() {
+    public CPF getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(CPF cpf) {
         this.cpf = cpf;
     }
 
@@ -211,10 +210,7 @@ public class Paciente implements Serializable {
         if (!Objects.equals(this.cpf, paciente.cpf)) {
             return false;
         }
-        if (!Objects.equals(this.id, paciente.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, paciente.id);
     }
 
     @Override

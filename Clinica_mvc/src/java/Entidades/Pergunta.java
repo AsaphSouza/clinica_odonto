@@ -29,11 +29,11 @@ public class Pergunta implements Serializable {
     @Column(name = "tipo")
     private String tipo;
     
-    @JoinColumn(name = "FK_QUESTIONARIO", referencedColumnName = "idQuestionario")
+    @JoinColumn(name = "idQuestionario", referencedColumnName = "idQuestionario")
     @ManyToOne
     private Questionario questionario;
     
-    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
+    @JoinColumn(name = "cro", referencedColumnName = "cro")
     @ManyToOne
     private Dentista dentistaa;
     

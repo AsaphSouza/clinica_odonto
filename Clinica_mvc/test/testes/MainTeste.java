@@ -4,6 +4,7 @@ import Entidades.Assistente;
 import Entidades.Consulta;
 import Entidades.Dentista;
 import Entidades.Endereco;
+import Entidades.Medicamento;
 import Entidades.Paciente;
 import Entidades.Pergunta;
 import Entidades.Questionario;
@@ -40,11 +41,7 @@ public class MainTeste {
     }
 
     private static void testePersistencia(EntityManager em) {
-//        Assistente assistente = new Assistente("Anna Maria Braga","Enfermagem");
-//        System.out.println(assistente);
-//        em.persist(assistente);
-//        System.out.println(assistente);
-
+        
 //          Endereco endereco = new Endereco("Garanhuns", "Brasil", "Pernambuco", "Brás Cubas", "Casa",635,"Heliópolis");
 //          Calendar c = Calendar.getInstance();
 //          c.set(1999, 11, 1); // no mes tem que colocar um a menos 
@@ -53,15 +50,22 @@ public class MainTeste {
 //          System.out.println(pac);
 //          em.persist(pac);
 //          System.out.println(pac);
-
-            Questionario questionario = new Questionario("Amnese");
-//          System.out.println(questionario);
-//          em.persist(questionario);
-//          System.out.println(questionario);
-//          System.out.println(questionario);
-            Dentista dentista = new Dentista("Josilane", "rolezeira");
-            Pergunta p1 = new Pergunta("Quem nasceu primeiro, o ovo, ou a galinha?", "xadada",questionario, dentista);
-            em.persist(p1);
+//            
+        Calendar data = Calendar.getInstance();
+        data.set(2018, 05, 21);
+        Dentista dentista = new Dentista();
+        dentista.setCro(1l);
+        Assistente assistente = new Assistente();
+        assistente.setId(1l);
+        Paciente paciente = new Paciente();
+        paciente.setId(1l);
+        Recepcionista recepcionista = new Recepcionista();
+        recepcionista.setId(1l);
+        Calendar dataMarcacao = Calendar.getInstance();
+        dataMarcacao.set(2018, 02, 17);
+        Consulta consulta = new Consulta("retorno", "Convenio", data.getTime(),
+                dentista, assistente, paciente, recepcionista, dataMarcacao.getTime());
+        em.persist(consulta);
     }
 
-} 
+}

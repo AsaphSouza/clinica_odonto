@@ -19,7 +19,7 @@ public class Dentista implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cro", nullable = false)
-    private String cro;
+    private Long cro;
     
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -39,7 +39,7 @@ public class Dentista implements Serializable {
     public Dentista() {
     }
     
-    public Dentista (String cro, String nome, String formacao) {
+    public Dentista (Long cro, String nome, String formacao) {
 	this.cro = cro;
 	this.nome = nome;
 	this.formacao = formacao;
@@ -75,11 +75,11 @@ public class Dentista implements Serializable {
         this.respostas = respostas;
     }
     
-    public String getCro() {
+    public Long getCro() {
         return cro;
     }
 
-    public void setCro(String cro) {
+    public void setCro(Long cro) {
         this.cro = cro;
     }
 

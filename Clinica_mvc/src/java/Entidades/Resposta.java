@@ -27,25 +27,25 @@ public class Resposta implements Serializable {
     @Column(name = "descricao", nullable = false)
     private String descricao;
     
-    @JoinColumn(name = "FK_PERGUNTA", referencedColumnName = "idPergunta")
+    @JoinColumn(name = "idPergunta", referencedColumnName = "idPergunta")
     @ManyToOne
     private Pergunta pergunta;
     
-    @JoinColumn(name = "FK_DENTISTA", referencedColumnName = "cro")
+    @JoinColumn(name = "cro", referencedColumnName = "cro")
     @ManyToOne
     private Dentista dentista;
     
     //@JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")
     @JoinTable (name = "doenca_tem_resposta",
-            joinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_DOENCA", referencedColumnName = "idDoenca")})
+            joinColumns = {@JoinColumn(name = "idResposta", referencedColumnName = "idResposta")},
+            inverseJoinColumns = {@JoinColumn(name = "idDoenca", referencedColumnName = "idDoenca")})
     @ManyToMany
     private List<Doenca> doencas;
     
     //@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")
     @JoinTable(name = "medicamento_tem_resposta",
-            joinColumns = {@JoinColumn(name = "FK_RESPOSTA", referencedColumnName = "idResposta")},
-            inverseJoinColumns = {@JoinColumn(name = "FK_MEDICAMENTO", referencedColumnName = "idMedicamento")})
+            joinColumns = {@JoinColumn(name = "idResposta", referencedColumnName = "idResposta")},
+            inverseJoinColumns = {@JoinColumn(name = "idMedicamento", referencedColumnName = "idMedicamento")})
     @ManyToMany
     private List<Medicamento> medicamentos;
 
