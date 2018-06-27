@@ -1,4 +1,4 @@
-package Entidades;
+package model.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,7 +43,7 @@ public class Paciente implements Serializable {
     private Date dataNascimento;
     
     @Column(name = "cpf", nullable = false)
-    private CPF cpf;
+    private String cpf;
     
     @Column(name = "profissao")
     private String profissao;
@@ -72,7 +72,7 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
     
-    public Paciente(String nome, char sexo,String telefone, Date dataNascimento, CPF cpf,
+    public Paciente(String nome, char sexo,String telefone, Date dataNascimento, String cpf,
             String profissao, String email, Endereco endereco, boolean utilizaMedicamento) {
         this.nome = nome;
         this.sexo = sexo;
@@ -141,11 +141,11 @@ public class Paciente implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public CPF getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(CPF cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

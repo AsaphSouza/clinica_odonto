@@ -4,13 +4,7 @@ import java.util.ArrayList;
 
 public class CPF {
 
-    private String cpf;
-
-    public CPF(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public boolean validarCpf() {
+    public boolean validarCpf(String cpf) {
         ArrayList<Integer> array = new ArrayList<>();
         int verificador1 = 0;
         int verificador2 = 0;
@@ -48,15 +42,7 @@ public class CPF {
             cpfSaida += array.get(i) + "";
         }
 
-        return this.cpf.equals(cpfSaida);
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+        return cpf.equals(cpfSaida);
     }
     
 }

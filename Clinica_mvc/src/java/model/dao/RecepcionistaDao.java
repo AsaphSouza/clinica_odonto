@@ -1,6 +1,6 @@
-package DAO;
+package model.dao;
 
-import Entidades.Recepcionista;
+import model.entidades.Recepcionista;
 
 public interface RecepcionistaDao extends DAO<Recepcionista> {
 

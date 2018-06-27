@@ -1,4 +1,4 @@
-package DAO;
+package model.dao;
 
 public interface DAO<T> {
 

@@ -1,14 +1,14 @@
 package testes;
 
-import Entidades.Assistente;
-import Entidades.Consulta;
-import Entidades.Dentista;
-import Entidades.Endereco;
-import Entidades.Medicamento;
-import Entidades.Paciente;
-import Entidades.Pergunta;
-import Entidades.Questionario;
-import Entidades.Recepcionista;
+import model.entidades.Assistente;
+import model.entidades.Consulta;
+import model.entidades.Dentista;
+import model.entidades.Endereco;
+import model.entidades.Medicamento;
+import model.entidades.Paciente;
+import model.entidades.Pergunta;
+import model.entidades.Questionario;
+import model.entidades.Recepcionista;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
-package DAO;
+package model.dao;
 
-import Entidades.Dentista;
+import model.entidades.Dentista;
 
 public interface DentistaDao extends DAO<Dentista> {
 

@@ -1,7 +1,7 @@
 package model;
 
-import Entidades.Recepcionista;
-import Entidades.Paciente;
+import model.entidades.Recepcionista;
+import model.entidades.Paciente;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;

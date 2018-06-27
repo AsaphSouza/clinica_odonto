@@ -1,7 +1,7 @@
-package HibernateDAO;
+package model.HibernateDAO;
 
-import DAO.PacienteDao;
-import Entidades.Paciente;
+import model.dao.PacienteDao;
+import model.entidades.Paciente;
 
 public class HibernatePacienteDao implements PacienteDao {
 

@@ -1,8 +1,9 @@
-package Entidades;
+package model.entidades;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,33 +13,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="recepcionista")
-public class Recepcionista implements Serializable {
+@Table(name = "assistente")
+public class Assistente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idRecepcionista",nullable = false)
+    @Column(name = "idAssistente", nullable = false)
     private Long id;
-
+    
     @Column(name = "nome", nullable = false)
     private String nome;
     
     @Column(name = "formacao", nullable = false)
     private String formacao;
     
-    @OneToMany(mappedBy = "recepcionista")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "assistente")
     private List<Consulta> consultas;
     
-    @OneToMany(mappedBy = "recepcionista")
-    private List<Exame> examesMarcados;
-    
-    public Recepcionista() {
-    }
-
-    public Recepcionista(String nome, String formacao) {
-        this.nome = nome;
-        this.formacao = formacao;
+    public Assistente() {
     }
 
     public List<Consulta> getConsultas() {
@@ -49,12 +42,9 @@ public class Recepcionista implements Serializable {
         this.consultas = consultas;
     }
 
-    public List<Exame> getExamesMarcados() {
-        return examesMarcados;
-    }
-
-    public void setExamesMarcados(List<Exame> examesMarcados) {
-        this.examesMarcados = examesMarcados;
+    public Assistente(String nome, String formacao) {
+        this.nome = nome;
+        this.formacao = formacao;
     }
 
     public String getNome() {
@@ -83,27 +73,27 @@ public class Recepcionista implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,nome,formacao);
+        return Objects.hash(id, nome, formacao);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object ass) {
+        if (this == ass) {
             return true;
         }
-        if (obj == null) {
+        if (!(ass instanceof Assistente)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Recepcionista recepcionista = (Recepcionista) obj;
-        return Objects.equals(this.id, recepcionista.id);
+        Assistente other = (Assistente) ass;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Recepcionista{" + "id=" + id + ", nome=" + nome + ", formacao=" + formacao + ", consultas=" + consultas + ", examesMarcados=" + examesMarcados + '}';
+        return "Assistente{" + "id=" + id + ", nome=" + nome + ", formacao=" + 
+                formacao + ", consultas=" + consultas + '}';
     }
+
+    
 
 }

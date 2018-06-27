@@ -1,4 +1,4 @@
-package Entidades;
+package model.entidades;
 
 import java.io.Serializable;
 import java.util.Date;

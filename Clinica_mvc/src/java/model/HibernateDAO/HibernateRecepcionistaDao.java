@@ -1,7 +1,7 @@
-package HibernateDAO;
+package model.HibernateDAO;
 
-import DAO.RecepcionistaDao;
-import Entidades.Recepcionista;
+import model.dao.RecepcionistaDao;
+import model.entidades.Recepcionista;
 
 public class HibernateRecepcionistaDao implements RecepcionistaDao {
 
