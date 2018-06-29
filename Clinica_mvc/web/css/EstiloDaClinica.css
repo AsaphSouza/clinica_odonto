@@ -1,0 +1,52 @@
+
+#camposlogin{
+    position: relative;
+    left: 2400px;
+    top: 10px;
+    background-color: #e3fddf;
+    width: 50px;
+    height: 50px;
+}
+
+#rodape{
+    position:absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    background-color: #e8fbe5;
+}
+
+#img{
+    position: relative;
+    float: left;
+    top: 0;
+    left: 0;
+
+}
+
+#teste_1{
+    width: 400px;
+    height: 400px;
+    background-image: url(White_Pony.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-color: activecaption;
+}
+
+#botaologar{
+    position: absolute;
+    right: 120px;
+    top: 230px;
+}
+
+#menu{
+    position: relative;
+    top :0;
+    right: 170px;
+}
+
+#nomelink{
+    position: absolute;
+    top: 255px;
+    right: 133px;
+}

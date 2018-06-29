@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="TemplateDaClinica.xhtml">
+
+    <title>Página do Paciente</title>
+
+    <h:form id="form">
+        <h1>Paciente</h1>
+
+        <p:panelGrid columns="1">
+
+            Dados Cadastrais 
+            <p:menu>
+                <p:submenu label="Cadastros">
+                    <p:menuitem value="Consultas" outcome="ConsultasPaciente" icon="ui-icon-person"/>
+                    <p:commandButton value="Exames" action="Exames"/>
+                    <p:commandButton value="Receitas e Atestados" action="ReceitaseAtestados"/>
+                    <p:commandButton value="Histórico Clínico" action="#HistoricoClinico"/>
+                    <p:commandButton value="Histórico Familiar" action="HistoricoFamiliar"/>
+                    <p:commandButton value="Agenda Médica" action="AgendaMedica"/>
+                    <p:commandButton value="Medicamentos" action="Medicamentos"/>
+                </p:submenu>
+            </p:menu>
+
+            <p:commandButton value="Sair" action="#{sair.sair()}" update="form"/>
+
+        </p:panelGrid>
+    </h:form>
+
+</ui:composition>

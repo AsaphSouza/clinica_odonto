@@ -31,7 +31,7 @@ public class PacienteModel {
 		if (p == null) {
 			lista.add(paciente);
 		} else {
-			throw new InvalidParameterException("Paciente j� existe");
+			throw new InvalidParameterException("Paciente já existe.");
 		}
 
 	}
@@ -44,7 +44,7 @@ public class PacienteModel {
 			}
 		}
 
-		throw new InvalidParameterException("Paciente n�o existe");
+		throw new InvalidParameterException("Paciente não existe");
 	}
 
 	public void deletarPaciente(Paciente p) {
@@ -56,7 +56,7 @@ public class PacienteModel {
 			}
 		}
 
-		throw new InvalidParameterException("Paciente n�o existe");
+		throw new InvalidParameterException("Paciente não existe");
 	}
 
 	private Paciente pegar(Paciente p) {

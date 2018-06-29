@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="TemplateDaClinica.xhtml">
+        
+    <title>cadastro</title>
+
+        <h:form>
+
+            <h1>TELA DE CADASTRO</h1>
+            <br></br>
+
+            <p:messages autoUpdate="true" id="msg" />
+
+            cadastro de pacientes
+
+            <div id="div1">
+
+                <p:panelGrid columns="6">
+
+
+                    <h2>Dados Pessoais :</h2>
+
+                    <p:outputLabel  value="Nome : *"/>
+                    <p:inputText value="#{paciente.nome}" required="true" requiredMessage="O nome é obrigatório"/>
+
+                    <p:outputLabel  value="Sobrenome : *"/>
+                    <p:inputText value="#{paciente.sobrenome}" required="true" requiredMessage="O Sobrenome é obrigatório"/>
+
+                    <p:outputLabel  value="Email :"/>
+                    <p:inputText value="#{paciente.email}"/>
+
+                    <p:outputLabel  value="Data de Nascimento : *"/>
+                    <p:inputMask mask="99/99/9999" value="#{paciente.data_nascimento}" requiredMessage="A informação 'data de nascimento' é obrigatória"/>
+
+                    <p:outputLabel  value="CPF : *"/>
+                    <p:inputMask mask="999.999.999-99" value="#{paciente.cpf}" requiredMessage="A informação 'CPF' é obrigatória"/>
+
+                    <p:outputLabel  value="Telefone :"/>
+                    <p:inputMask mask="(99)99999-9999" value="#{paciente.numero_telefone}" requiredMessage="A informação 'telefone' é obrigatória"/>
+
+                    <p:outputLabel  value="Profissão :"/>
+                    <p:inputText value="#{paciente.profissao}"/>
+
+
+                    <p:selectOneRadio value="#{paciente.sexo}" required="true" requiredMessage="A informação 'Sexo' é obrigatória">
+                        <f:selectItem itemLabel="M" itemValue="Masculino"/>
+                        <f:selectItem itemLabel="F" itemValue="Feminino"/>
+                    </p:selectOneRadio>
+
+                    <h2>Endereço :</h2>
+
+                    <p:outputLabel value="Rua : *"/>
+                    <p:inputText value="#{paciente.rua}" required="true" requiredMessage="A rua é obrigatória"/>
+
+                    <p:outputLabel value="Nº :"/>
+                    <p:inputText value="#{paciente.numero}"/>
+
+                    <p:outputLabel value="Bairro :"/>
+                    <p:inputText value="#{paciente.bairro}"/>
+
+                    <li class="estado" style="display: none"><!-- CRIAR CLASSE ENDEREÇO COM UM ARRAYLIST DE ENDEREÇOS-->
+                        <p:outputLabel value="UF : *"/>
+                        <select id="estado" name="estado" class="selectEstado">
+                            <option value="">Selecione o seu estado</option>
+                            <option value="AC" >Acre</option>
+                            <option value="AL" >Alagoas</option>
+                            <option value="AP" >Amapá</option>
+                            <option value="AM" >Amazonas</option>
+                            <option value="BA" >Bahia</option>
+                            <option value="CE" >Ceará</option>
+                            <option value="DF" >Distrito Federal</option>
+                            <option value="ES" >Espírito Santo</option>
+                            <option value="GO" >Goiás</option>
+                            <option value="MA" >Maranhão</option>
+                            <option value="MT" >Mato Grosso</option>
+                            <option value="MS" >Mato Grosso do Sul</option>
+                            <option value="MG" >Minas Gerais</option>
+                            <option value="PA" >Pará</option>
+                            <option value="PB" >Paraíba</option>
+                            <option value="PR" >Paraná</option>
+                            <option value="PE" >Pernambuco</option>
+                            <option value="PI" >Piauí</option>
+                            <option value="RJ" >Rio de Janeiro</option>
+                            <option value="RN" >Rio Grande do Norte</option>
+                            <option value="RS" >Rio Grande do Sul</option>
+                            <option value="RO" >Rondônia</option>
+                            <option value="RR" >Roraima</option>
+                            <option value="SC" >Santa Catarina</option>
+                            <option value="SP" >São Paulo</option>
+                            <option value="SE" >Sergipe</option>
+                            <option value="TO" >Tocantins</option>
+                        </select>
+                    </li>
+
+                    <p:outputLabel value="cidade :"/>
+                    <p:inputText value="#{paciente.cidade}"/>
+
+                    <p:outputLabel value="País :"/>
+                    <p:inputText value="#{paciente.pais}"/>  
+
+                    <p:outputLabel value="Complemento :"/>
+                    <p:inputText value="#{paciente.complemento}"/>  
+
+                    <p:outputLabel value="Senha : *" />
+                    <p:password value="#{paciente.senha}" feedback="true" weakLabel="Muito fraca" goodLabel="Senha razoável" strongLabel="Senha forte"
+                                inline="true" promptLabel="Informe uma senha" match="Confirma" required="true" requiredMessage="A senha é obrigatória"
+                                validatorMessage="A senha e a confirmação estão diferentes"/>
+
+                    <p:outputLabel value="Confirmação de senha : *" />
+                    <p:password value="#{paciente.confirmacao_de_senha}" required="true"/>
+
+
+                    <p:commandButton value="cadastrar" action="#{controller.cadastroPaciente.cadastrar()}" icon="ui-icon-disk" />
+
+                    <p:commandButton value="voltar" action="#{controller.sair.sair()}"/>
+
+                </p:panelGrid>
+
+            </div>
+
+        </h:form>
+
+</ui:composition>

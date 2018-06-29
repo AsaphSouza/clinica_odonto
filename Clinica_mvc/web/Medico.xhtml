@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>TODO supply a title</title>
+
+    </h:head>
+
+    <h:body>
+        <h:form id="form">
+            <h1>Dentista</h1>
+
+            <p:panelGrid columns="1">
+
+                <p:menu>
+                    <p:submenu label="Cadastros">
+
+                        Dados Cadastrais
+                        
+                        <p:menuitem value="Consultas" outcome="ConsultasPaciente" icon="ui-icon-person" />
+                        <p:menuitem value="Exames" outcome="Exames" icon="ui-icon-person" />
+                        <p:menuitem value="Agenda Médica" outcome="AgendaMedica" icon="ui-icon-person" />
+                    </p:submenu>
+                </p:menu>
+
+                <p:commandButton value="Sair" action="#{sair.sair()}" update="form"/>
+
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
