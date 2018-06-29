@@ -1,4 +1,4 @@
-package model.HibernateDAO;
+package model.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

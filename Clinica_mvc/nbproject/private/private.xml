@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/dao/DAO.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/entidades/Consulta.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/ConsultaModel.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/dao/ConsultaDao.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/HibernateDAO/HibernateConsultaDao.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

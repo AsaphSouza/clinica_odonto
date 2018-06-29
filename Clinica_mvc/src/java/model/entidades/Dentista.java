@@ -18,8 +18,11 @@ public class Dentista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDentista", nullable = false)
+    private Long id;
+    
     @Column(name = "cro", nullable = false)
-    private Long cro;
+    private String cro;
     
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -39,16 +42,18 @@ public class Dentista implements Serializable {
     public Dentista() {
     }
     
-    public Dentista (Long cro, String nome, String formacao) {
+    public Dentista (String cro, String nome, String formacao) {
 	this.cro = cro;
 	this.nome = nome;
 	this.formacao = formacao;
     }
-    
-    public Dentista (String nome, String formacao) {
-	this.cro = cro;
-	this.nome = nome;
-	this.formacao = formacao;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Consulta> getConsultas() {
@@ -75,11 +80,11 @@ public class Dentista implements Serializable {
         this.respostas = respostas;
     }
     
-    public Long getCro() {
+    public String getCro() {
         return cro;
     }
 
-    public void setCro(Long cro) {
+    public void setCro(String cro) {
         this.cro = cro;
     }
 

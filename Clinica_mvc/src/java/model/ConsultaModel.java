@@ -1,7 +1,7 @@
 package model;
 
 import model.dao.ConsultaDao;
-import model.HibernateDAO.HibernateConsultaDao;
+import model.Hibernate.ConsultaHibernate;
 import model.entidades.Consulta;
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -12,7 +12,7 @@ public class ConsultaModel {
     private List<Consulta> lista;
 
     public ConsultaModel() {
-        this.dao = new HibernateConsultaDao();
+        this.dao = new ConsultaHibernate();
     }
 
     public List<Consulta> getLista() {

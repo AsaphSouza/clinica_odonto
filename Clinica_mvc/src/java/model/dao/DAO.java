@@ -7,7 +7,6 @@ public interface DAO<T> {
 	public void atualizar(T obj);
 
 	public void deletar(T obj);
-
-	public T pegar(T obj);
-
+        
+        public long buscarPeloID(long id);
 }

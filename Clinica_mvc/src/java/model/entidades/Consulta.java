@@ -37,7 +37,7 @@ public class Consulta implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date data;
     
-    @JoinColumn(name = "cro", referencedColumnName = "cro")
+    @JoinColumn(name = "iddentista", referencedColumnName = "iddentista")
     @ManyToOne
     private Dentista dentista;
     

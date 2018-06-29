@@ -1,18 +1,43 @@
-package model.HibernateDAO;
+package model.Hibernate;
 
+import java.util.Date;
 import javax.persistence.EntityManager;
-import model.dao.DentistaDao;
-import model.entidades.Dentista;
+import model.dao.ConsultaDao;
+import model.entidades.Consulta;
+import org.hibernate.HibernateException;
 
-public class HibernateDentistaDao implements DentistaDao {
+public class ConsultaHibernate implements ConsultaDao {
+
     private final EntityManager em = Persistencia.getEntityManager();
-    
+
     @Override
-    public void inserir(Dentista dentista) {
+    public void inserir(Consulta consulta) {
         try {
             em.getTransaction().begin();
-            em.persist(dentista);
+            em.persist(consulta);
             em.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            em.getTransaction().rollback();
+
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void atualizar(Consulta consulta) {
+        try {
+            em.getTransaction().begin();
+            em.merge(consulta);
+            em.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            em.getTransaction().rollback();
+
         } catch (Exception e) {
             em.getTransaction().rollback();
         } finally {
@@ -21,41 +46,36 @@ public class HibernateDentistaDao implements DentistaDao {
     }
 
     @Override
-    public void atualizar(Dentista dentista) {
+    public void deletar(Consulta consulta) {
         try {
             em.getTransaction().begin();
-            em.merge(dentista);
+            em.remove(consulta);
             em.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            em.getTransaction().rollback();
+
         } catch (Exception e) {
             em.getTransaction().rollback();
+
         } finally {
             em.close();
         }
     }
 
     @Override
-    public void deletar(Dentista dentista) {
-        try {
-            em.getTransaction().begin();
-            em.remove(dentista);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public Dentista pegar(Dentista obj) {
-        // TODO Auto-generated method stub
+    public Consulta buscarPorDia(Date data) {
         return null;
     }
 
     @Override
-    public Dentista procurarPelocro(int cro) {
-        // TODO Auto-generated method stub
+    public Consulta buscarPorPeriodo(Date dataInicial, Date dataFinal) {
         return null;
+    }
+
+    @Override
+    public long buscarPeloID(long id) {
+        return 1l;
     }
 
 }

@@ -4,6 +4,6 @@ import model.entidades.Dentista;
 
 public interface DentistaDao extends DAO<Dentista> {
 
-	public Dentista procurarPelocro(int cro);
+	public Dentista BuscarPeloCRO(String cro);
 
 }

@@ -51,21 +51,7 @@ public class MainTeste {
 //          em.persist(pac);
 //          System.out.println(pac);
 //            
-        Calendar data = Calendar.getInstance();
-        data.set(2018, 05, 21);
-        Dentista dentista = new Dentista();
-        dentista.setCro(1l);
-        Assistente assistente = new Assistente();
-        assistente.setId(1l);
-        Paciente paciente = new Paciente();
-        paciente.setId(1l);
-        Recepcionista recepcionista = new Recepcionista();
-        recepcionista.setId(1l);
-        Calendar dataMarcacao = Calendar.getInstance();
-        dataMarcacao.set(2018, 02, 17);
-        Consulta consulta = new Consulta("retorno", "Convenio", data.getTime(),
-                dentista, assistente, paciente, recepcionista, dataMarcacao.getTime());
-        em.persist(consulta);
+
     }
 
 }
