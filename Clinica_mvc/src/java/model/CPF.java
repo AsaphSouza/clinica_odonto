@@ -1,4 +1,3 @@
-//esta classe valida o cpf
 package model;
 
 import java.util.ArrayList;
