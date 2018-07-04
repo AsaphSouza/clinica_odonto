@@ -69,6 +69,7 @@ public class PacienteHibernate implements PacienteDao {
         return null;
     }
 
+    @Override
     public long buscarPeloID(long id) {
         return 1l;
     }
