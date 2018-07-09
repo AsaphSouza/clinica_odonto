@@ -26,6 +26,30 @@ public class ControllerPaciente {
         this.entityManager = entityManager;
     }
 
+    public PacienteModel getPacienteModel() {
+        return pacienteModel;
+    }
+
+    public void setPacienteModel(PacienteModel pacienteModel) {
+        this.pacienteModel = pacienteModel;
+    }
+
+    public List<Paciente> getListaPaciente() {
+        return listaPaciente;
+    }
+
+    public void setListaPaciente(List<Paciente> listaPaciente) {
+        this.listaPaciente = listaPaciente;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     public void cadastrarPaciente(Paciente paciente) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
