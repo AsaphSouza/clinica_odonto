@@ -1,7 +1,9 @@
 package model.Hibernate;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.dao.PacienteDao;
 import model.entidades.Paciente;
 import org.hibernate.HibernateException;
@@ -66,7 +68,19 @@ public class PacienteHibernate implements PacienteDao {
 
     @Override
     public Paciente buscarPeloCPF(String cpf) {
-        return null;
+        Paciente paciente = null;
+        String jpql = "from Paciente where cpf = :cpf";
+        try {
+            Query query = this.em.createQuery(jpql);
+            query.setParameter("cpf", cpf);
+            paciente = (Paciente)query.getSingleResult();
+            
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
+        }  finally {
+            em.close();
+        }
+        return paciente;
     }
 
     @Override

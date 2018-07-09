@@ -8,12 +8,12 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import model.PacienteModel;
 import model.entidades.Paciente;
+import org.hibernate.HibernateException;
 
 @ManagedBean
 @SessionScoped
 public class ControllerPaciente {
 
-    Paciente paciente;
     PacienteModel pacienteModel;
     private final EntityManager entityManager;
     private List<Paciente> listaPaciente;
@@ -23,14 +23,13 @@ public class ControllerPaciente {
         this.entityManager = entityManager;
     }
 
-    public void cadastrarPaciente() {
+    public void cadastrarPaciente(Paciente paciente) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             pacienteModel.inserirPaciente(paciente);
             context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
-            
-            // listaTodos();
-            paciente = new Paciente();
+        } catch (HibernateException e) {
+            context.addMessage(null, new FacesMessage(e.getMessage()));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } finally {
@@ -39,16 +38,14 @@ public class ControllerPaciente {
 
     }
     
-    public void deletarFuncionario() {
+    public void deletarPaciente(Paciente paciente) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             pacienteModel.deletarPaciente(paciente);
-            //listaTodos();
-            paciente = new Paciente();
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } finally {
+            entityManager.close();
         }
-
     }
-
 }

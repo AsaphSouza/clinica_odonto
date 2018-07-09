@@ -5,6 +5,7 @@ import java.security.InvalidParameterException;
 import java.util.List;
 import model.Hibernate.PacienteHibernate;
 import model.dao.PacienteDao;
+import org.hibernate.HibernateException;
 
 public class PacienteModel {
 
@@ -36,26 +37,24 @@ public class PacienteModel {
     }
 
     public void inserirPaciente(Paciente paciente) {
-        
-        if (cpf.validarCpf(paciente.getCpf()) == false) {
-            // cpf não é válido
+        try {
+           if (cpf.validarCpf(paciente.getCpf()) == false) {
             throw new InvalidParameterException("CPF não é válido.");
         } else {
             if (pacienteDao.buscarPeloCPF(paciente.getCpf()) == null) {
                 pacienteDao.inserir(paciente);
-                // paciente cadastrado com sucesso
             } else {
-                // paciente já cadastrado na base de dados
                 throw new InvalidParameterException("Paciente já cadastrado na base de dados.");
             }
+        } 
+        } catch (HibernateException e) {
+            throw new InvalidParameterException("Erro na Base de Dados.");
         }
-
     }
 
     public void atualizarPaciente(Paciente paciente) {
         try {
             pacienteDao.atualizar(paciente);
-            //Dados atualizados com sucesso!
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao atualizar os dados do paciente.");
         }
@@ -63,13 +62,19 @@ public class PacienteModel {
     }
 
     public void deletarPaciente(Paciente paciente) {
-        //tem certeza que deseja deletar o paciente?
-        pacienteDao.deletar(paciente);
-        //Paciente excluido com sucesso da base de dados!
+        try {
+            pacienteDao.deletar(paciente);
+        } catch (Exception e) {
+            throw new InvalidParameterException("Erro ao deletar paciente.");
+        }
     }
 
-    public Paciente buscarpPorCPF(Paciente paciente) {
-        return pacienteDao.buscarPeloCPF(paciente.getCpf());
+    public Paciente buscarpPorCPF(String cpf) {
+        try {
+           return pacienteDao.buscarPeloCPF(cpf); 
+        } catch (Exception e) {
+            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
+        }     
     }
     
     public Paciente buscarPorID (Paciente paciente) {

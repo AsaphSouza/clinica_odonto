@@ -1,5 +1,6 @@
 package model.Hibernate;
 
+import java.security.InvalidParameterException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import model.dao.DentistaDao;
@@ -66,19 +67,15 @@ public class DentistaHibernate implements DentistaDao {
     @Override
     public Dentista BuscarPeloCRO(String cro) {
         Dentista dentista = null;
-        String sql = "select * from dentista where cro = :cro";
+        String jpql = "from Dentista where cro = :cro";
         try {
-            Query query = this.em.createQuery(sql);
+            Query query = this.em.createQuery(jpql);
             query.setParameter("cro", cro);
             dentista = (Dentista)query.getSingleResult();
             
         } catch(HibernateException e){
-            em.getTransaction().rollback();
-            
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            
-        } finally {
+            throw new InvalidParameterException("Erro ao buscar pelo CRO.");
+        }  finally {
             em.close();
         }
         return dentista;
