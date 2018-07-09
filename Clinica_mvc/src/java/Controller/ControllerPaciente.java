@@ -17,8 +17,10 @@ public class ControllerPaciente {
     PacienteModel pacienteModel;
     private final EntityManager entityManager;
     private List<Paciente> listaPaciente;
+    private Paciente paciente;
 
-    public ControllerPaciente(PacienteModel pacienteModel, EntityManager entityManager) {
+    public ControllerPaciente(Paciente paciente, PacienteModel pacienteModel, EntityManager entityManager) {
+        this.paciente = new Paciente();
         this.pacienteModel = pacienteModel;
         this.entityManager = entityManager;
     }
@@ -47,5 +49,32 @@ public class ControllerPaciente {
         } finally {
             entityManager.close();
         }
+    }
+    
+    public void atualizarPaciente(Paciente paciente) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            pacienteModel.atualizarPaciente(paciente);
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } finally {
+            entityManager.close();
+        }
+    }
+    
+    public Paciente buscarPaciente (String cpf) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           paciente = pacienteModel.buscarpPorCPF(cpf);
+        } catch (HibernateException ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+            paciente = null;
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            paciente = null;
+        } finally {
+            entityManager.close();
+        }
+        return paciente;
     }
 }
