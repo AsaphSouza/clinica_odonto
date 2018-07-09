@@ -14,21 +14,25 @@ public class PacienteModel {
     private CPF cpf;
 
     
-    public void marcarConsulta() {// as requisi��es que ir�o serem feitas no sistema deve ficar no "model"
-        // aqui marcará a consulta
+    public void marcarConsulta() {
+        
     }
 
     public void marcarExame() {
-        // aqui marcará o exame
+        
     }
 
     public void cancelarEC() {
-        // aqui cancela os exames ou consultas
     }
     
-    //rever
     public List<Paciente> listarPacientes () {
-        return pacienteDao.listarTodos();
+        try {
+            lista = null;
+            this.lista = pacienteDao.listarTodos();
+        } catch (Exception e) {
+            throw new InvalidParameterException("Erro ao listar pacientes.");
+        }
+        return lista;
     }
 
     public PacienteModel() {
@@ -77,9 +81,26 @@ public class PacienteModel {
         }     
     }
     
+    //não está sendo usado
     public Paciente buscarPorID (Paciente paciente) {
         pacienteDao.buscarPeloID(paciente.getId());
         return null;
     }
-
+    
+    public List<Paciente> buscarPcidade(String cidade) {
+        try {
+            return pacienteDao.buscarPorCidade(cidade);
+        } 
+        catch (Exception e) {
+            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
+        }
+    }
+    
+    public List<Paciente> buscarPestado (String estado) {
+        try {
+            return pacienteDao.buscarPorEstado(estado);
+        } catch (Exception e) {
+            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
+        }
+    }
 }

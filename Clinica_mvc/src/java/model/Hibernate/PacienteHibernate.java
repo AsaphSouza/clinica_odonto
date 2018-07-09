@@ -90,17 +90,51 @@ public class PacienteHibernate implements PacienteDao {
 
     @Override
     public List<Paciente> buscarPorCidade(String cidade) {
-        return null;
+        List <Paciente> pacientes = null;
+        String jpql = "from Paciente where cidade = :cidade";
+        try {
+            Query query = this.em.createQuery(jpql);
+            query.setParameter("cidade", cidade);
+            pacientes = (List<Paciente>)query.getResultList();
+            
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao listar pacientes.");
+        }  finally {
+            em.close();
+        }
+        return pacientes;
     }
 
     @Override
     public List<Paciente> buscarPorEstado(String estado) {
-       return null;
+       List <Paciente> pacientes = null;
+        String jpql = "from Paciente where cidade = :estado";
+        try {
+            Query query = this.em.createQuery(jpql);
+            query.setParameter("estado", estado);
+            pacientes = (List<Paciente>)query.getResultList();
+            
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao listar pacientes.");
+        }  finally {
+            em.close();
+        }
+        return pacientes;
     }
 
     @Override
     public List<Paciente> listarTodos() {
-        return null;
+        List <Paciente> pacientes = null;
+        String jpql = "from Paciente";
+        try {
+            Query query = this.em.createQuery(jpql);
+            pacientes = (List<Paciente>)query.getResultList();
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao listar pacientes.");
+        }  finally {
+            em.close();
+        }
+        return pacientes;
     }
 
 }

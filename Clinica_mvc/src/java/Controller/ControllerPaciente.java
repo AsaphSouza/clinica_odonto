@@ -19,7 +19,8 @@ public class ControllerPaciente {
     private List<Paciente> listaPaciente;
     private Paciente paciente;
 
-    public ControllerPaciente(Paciente paciente, PacienteModel pacienteModel, EntityManager entityManager) {
+    public ControllerPaciente(Paciente paciente, PacienteModel pacienteModel, 
+            EntityManager entityManager) {
         this.paciente = new Paciente();
         this.pacienteModel = pacienteModel;
         this.entityManager = entityManager;
@@ -62,7 +63,7 @@ public class ControllerPaciente {
         }
     }
     
-    public Paciente buscarPaciente (String cpf) {
+    public Paciente buscarPacienteCPF (String cpf) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
            paciente = pacienteModel.buscarpPorCPF(cpf);
@@ -76,5 +77,50 @@ public class ControllerPaciente {
             entityManager.close();
         }
         return paciente;
+    }
+    
+    public List<Paciente> buscarPorCidades (String cidade) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           this.listaPaciente = null;
+           this.listaPaciente = pacienteModel.buscarPcidade(cidade);
+        } catch (HibernateException ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+        } finally {
+            entityManager.close();
+        }
+        return listaPaciente;
+    }
+    
+    public List<Paciente> buscarPorEstado (String estado) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           this.listaPaciente = null;
+           this.listaPaciente = pacienteModel.buscarPestado(estado);
+        } catch (HibernateException ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+        } finally {
+            entityManager.close();
+        }
+        return listaPaciente;
+    }
+    
+    public List<Paciente> buscarTodos () {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           this.listaPaciente = null;
+           this.listaPaciente = pacienteModel.listarPacientes();
+        } catch (HibernateException ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+        } finally {
+            entityManager.close();
+        }
+        return listaPaciente;
     }
 }
