@@ -1,6 +1,8 @@
 package model.Hibernate;
 
+import java.security.InvalidParameterException;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.dao.AtestadoDAO;
 import model.entidades.Atestado;
 import org.hibernate.HibernateException;
@@ -64,7 +66,19 @@ public class AtestadoHibernate implements AtestadoDAO{
 
     @Override
     public Atestado buscarPorTipo(String tipo) {
-       return null; 
+        Atestado atestado = null;
+        String jpql = "from Atestado where tipo = :tipo";
+        try {
+            Query query = this.em.createQuery(jpql);
+            query.setParameter("tipo", tipo);
+            atestado = (Atestado)query.getSingleResult();
+            
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao buscar pelo atestado.");
+        }  finally {
+            em.close();
+        }
+        return atestado;
     }
 
     @Override

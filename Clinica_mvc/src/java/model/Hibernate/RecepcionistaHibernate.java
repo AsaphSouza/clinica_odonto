@@ -1,6 +1,8 @@
 package model.Hibernate;
 
+import java.security.InvalidParameterException;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import model.dao.RecepcionistaDao;
 import model.entidades.Recepcionista;
 import org.hibernate.HibernateException;
@@ -64,8 +66,19 @@ public class RecepcionistaHibernate implements RecepcionistaDao {
 
     @Override
     public Recepcionista BuscarPorNome(String nome) {
-
-        return null;
+        Recepcionista recepcionista = null;
+        String jpql = "from Recepcionista where nome = :nome";
+        try {
+            Query query = this.em.createQuery(jpql);
+            query.setParameter("nome", nome);
+            recepcionista = (Recepcionista)query.getSingleResult();
+            
+        } catch(HibernateException e){
+            throw new InvalidParameterException("Erro ao buscar pelo recepcionista.");
+        }  finally {
+            em.close();
+        }
+        return recepcionista;
     }
 
     @Override

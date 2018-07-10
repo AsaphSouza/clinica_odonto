@@ -59,10 +59,6 @@ public class DentistaHibernate implements DentistaDao {
             em.close();
         }
     }
-//    public Dentista buscarPeloId (Long id) {
-//        Dentista dentista = em.find(Dentista.class, Long.valueOf(id));
-//        return dentista;
-//    }
 
     @Override
     public Dentista BuscarPeloCRO(String cro) {
