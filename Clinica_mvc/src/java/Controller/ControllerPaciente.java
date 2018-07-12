@@ -15,7 +15,7 @@ import org.hibernate.HibernateException;
 public class ControllerPaciente {
 
     PacienteModel pacienteModel;
-    private final EntityManager entityManager;
+    private final EntityManager ENTITY_MANAGER;
     private List<Paciente> listaPaciente;
     private Paciente paciente;
 
@@ -23,9 +23,9 @@ public class ControllerPaciente {
             EntityManager entityManager) {
         this.paciente = new Paciente();
         this.pacienteModel = pacienteModel;
-        this.entityManager = entityManager;
+        this.ENTITY_MANAGER = entityManager;
     }
-
+    
     public PacienteModel getPacienteModel() {
         return pacienteModel;
     }
@@ -60,7 +60,7 @@ public class ControllerPaciente {
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
 
     }
@@ -72,7 +72,7 @@ public class ControllerPaciente {
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
     }
     
@@ -83,7 +83,7 @@ public class ControllerPaciente {
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
     }
     
@@ -98,7 +98,7 @@ public class ControllerPaciente {
             context.addMessage(null, new FacesMessage(e.getMessage()));
             paciente = null;
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
         return paciente;
     }
@@ -113,7 +113,7 @@ public class ControllerPaciente {
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }
@@ -128,7 +128,7 @@ public class ControllerPaciente {
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }
@@ -143,7 +143,7 @@ public class ControllerPaciente {
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
         } finally {
-            entityManager.close();
+            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }

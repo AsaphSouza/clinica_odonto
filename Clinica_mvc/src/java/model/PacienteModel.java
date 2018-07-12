@@ -10,7 +10,7 @@ import org.hibernate.HibernateException;
 public class PacienteModel {
 
     private List<Paciente> lista;
-    private final PacienteDao pacienteDao;
+    private final PacienteDao PACIENTE_DAO;
     private CPF cpf;
 
     
@@ -28,7 +28,7 @@ public class PacienteModel {
     public List<Paciente> listarPacientes () {
         try {
             lista = null;
-            this.lista = pacienteDao.listarTodos();
+            this.lista = PACIENTE_DAO.listarTodos();
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao listar pacientes.");
         }
@@ -36,7 +36,7 @@ public class PacienteModel {
     }
 
     public PacienteModel() {
-        this.pacienteDao = new PacienteHibernate();
+        this.PACIENTE_DAO = new PacienteHibernate();
         
     }
 
@@ -45,8 +45,8 @@ public class PacienteModel {
            if (cpf.validarCpf(paciente.getCpf()) == false) {
             throw new InvalidParameterException("CPF não é válido.");
         } else {
-            if (pacienteDao.buscarPeloCPF(paciente.getCpf()) == null) {
-                pacienteDao.inserir(paciente);
+            if (PACIENTE_DAO.buscarPeloCPF(paciente.getCpf()) == null) {
+                PACIENTE_DAO.inserir(paciente);
             } else {
                 throw new InvalidParameterException("Paciente já cadastrado na base de dados.");
             }
@@ -58,7 +58,7 @@ public class PacienteModel {
 
     public void atualizarPaciente(Paciente paciente) {
         try {
-            pacienteDao.atualizar(paciente);
+            PACIENTE_DAO.atualizar(paciente);
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao atualizar os dados do paciente.");
         }
@@ -67,7 +67,7 @@ public class PacienteModel {
 
     public void deletarPaciente(Paciente paciente) {
         try {
-            pacienteDao.deletar(paciente);
+            PACIENTE_DAO.deletar(paciente);
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao deletar paciente.");
         }
@@ -75,7 +75,7 @@ public class PacienteModel {
 
     public Paciente buscarpPorCPF(String cpf) {
         try {
-           return pacienteDao.buscarPeloCPF(cpf); 
+           return PACIENTE_DAO.buscarPeloCPF(cpf); 
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao buscar pelo paciente.");
         }     
@@ -83,13 +83,13 @@ public class PacienteModel {
     
     //não está sendo usado
     public Paciente buscarPorID (Paciente paciente) {
-        pacienteDao.buscarPeloID(paciente.getId());
+        PACIENTE_DAO.buscarPeloID(paciente.getId());
         return null;
     }
     
     public List<Paciente> buscarPcidade(String cidade) {
         try {
-            return pacienteDao.buscarPorCidade(cidade);
+            return PACIENTE_DAO.buscarPorCidade(cidade);
         } 
         catch (Exception e) {
             throw new InvalidParameterException("Erro ao buscar pelo paciente.");
@@ -98,7 +98,7 @@ public class PacienteModel {
     
     public List<Paciente> buscarPestado (String estado) {
         try {
-            return pacienteDao.buscarPorEstado(estado);
+            return PACIENTE_DAO.buscarPorEstado(estado);
         } catch (Exception e) {
             throw new InvalidParameterException("Erro ao buscar pelo paciente.");
         }
