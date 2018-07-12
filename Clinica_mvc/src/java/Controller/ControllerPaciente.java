@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import model.PacienteModel;
+import model.entidades.Endereco;
 import model.entidades.Paciente;
 import org.hibernate.HibernateException;
 
@@ -18,12 +19,21 @@ public class ControllerPaciente {
     private final EntityManager ENTITY_MANAGER;
     private List<Paciente> listaPaciente;
     private Paciente paciente;
+    private Endereco endereco;
 
     public ControllerPaciente(Paciente paciente, PacienteModel pacienteModel, 
             EntityManager entityManager) {
         this.paciente = new Paciente();
         this.pacienteModel = pacienteModel;
         this.ENTITY_MANAGER = entityManager;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
     
     public PacienteModel getPacienteModel() {
