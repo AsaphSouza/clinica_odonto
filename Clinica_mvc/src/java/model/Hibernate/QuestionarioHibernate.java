@@ -1,6 +1,11 @@
 package model.Hibernate;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import model.entidades.Pergunta;
 import model.dao.QuestionarioDAO;
 import model.entidades.Questionario;
 import org.hibernate.HibernateException;
@@ -64,8 +69,16 @@ public class QuestionarioHibernate implements QuestionarioDAO{
     }
 
     @Override
-    public Questionario buscarPorNome(String nome) {
-        return null;
+    public List<Pergunta> buscarPorNome(String nome) {
+    	TypedQuery<Pergunta> query;
+        try {
+            query = em.createQuery("select * from Questionario as q join Pergunta as p where q.idquestionario = :p.idquestionario"
+            		+ "and q.nome = :nome",Pergunta.class);
+            query.setParameter("nome", nome);
+            return  query.getResultList();
+        } catch(NoResultException e){
+            return null;
+        }
     }
 
     @Override

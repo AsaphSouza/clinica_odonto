@@ -1,6 +1,10 @@
 package model.Hibernate;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import model.dao.PerguntaDAO;
 import model.entidades.Pergunta;
 import org.hibernate.HibernateException;
@@ -64,8 +68,15 @@ public class PerguntaHibernate implements PerguntaDAO{
     }
 
     @Override
-    public Pergunta buscarPorTipo(String tipo) {
-        return null;
+    public List<Pergunta> buscarPorTipo(String tipo) {
+    	TypedQuery<Pergunta> query;
+        try {
+            query = em.createQuery("from Pergunta where tipo = :tipo",Pergunta.class);
+            query.setParameter("tipo", tipo);
+            return  query.getResultList();
+        } catch(NoResultException e){
+            return null;
+        }
     }
 
     @Override

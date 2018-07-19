@@ -1,12 +1,12 @@
 package model.Hibernate;
 
-import java.security.InvalidParameterException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import model.dao.ConsultaDao;
 import model.entidades.Consulta;
 import org.hibernate.HibernateException;
@@ -70,37 +70,30 @@ public class ConsultaHibernate implements ConsultaDao {
 
     @Override
     public List<Consulta> buscarPorDia(Date data) {
-        List<Consulta> consultas = null;
-        String jpql = "from Consulta where data = :data";
+    	TypedQuery<Consulta> query;
         try {
-            Query query = this.em.createQuery(jpql);
+            query = em.createQuery("from Consulta where data = :data",Consulta.class);
             query.setParameter("data", data);
-            consultas = (List<Consulta>)query.getResultList();
+            return  query.getResultList();
             
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
-        }  finally {
-            em.close();
+        } catch(NoResultException e){
+            return null;
         }
-        return consultas;
     }
 
     @Override
     public List<Consulta> buscarPorPeriodo(Date dataInicial, Date dataFinal) {
-        List<Consulta>consultas = null;
-        String jpql = "from Dentista where data between (:dataInicial, :dataFinal)";
+    	TypedQuery<Consulta>query;
         try {
-            Query query = this.em.createQuery(jpql);
+            query = em.createQuery("from Dentista where data between (:dataInicial, :dataFinal)",Consulta.class);
             query.setParameter("dataInicial", dataInicial);
             query.setParameter("dataFinal", dataFinal);
-            consultas = (List<Consulta>) query.getResultList();
+            return query.getResultList();
             
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao buscar consultas por período.");
-        }  finally {
-            em.close();
+        } catch(NoResultException e){
+            return null;
         }
-        return consultas;
+
     }
 
     @Override
@@ -110,26 +103,18 @@ public class ConsultaHibernate implements ConsultaDao {
 
     @Override
     public List<Consulta> buscarPorMes(Date data) {
-//        GregorianCalendar calendar = new GregorianCalendar();
-//        calendar.setTime(data);
-//        int mes = calendar.get(Calendar.MONTH);
-//        
-//        List<Consulta>consultas = null;
-//        String jpql = "from Dentista where data between (:dataInicial, :dataFinal)";
-//        try {
-//            Query query = this.em.createQuery(jpql);
-//            query.setParameter("dataInicial", dataInicial);
-//            query.setParameter("dataFinal", dataFinal);
-//            consultas = (List<Consulta>) query.getResultList();
-//            
-//        } catch(HibernateException e){
-//            throw new InvalidParameterException("Erro ao buscar consultas por período.");
-//        }  finally {
-//            em.close();
-//        }
-//        return consultas;
-          return null;
+        TypedQuery<Consulta> query;
+        try {
+        	GregorianCalendar calendar = new GregorianCalendar();
+        	calendar.setTime(data);
+        	int mes = calendar.get(Calendar.MONTH);
+            query = em.createQuery("from Dentista where MONTH(data) = : mes",Consulta.class);
+            query.setParameter("mes", mes);
+            return query.getResultList();
+            
+        } catch(NoResultException e){
+        	return null;
+        }
     }
-
 
 }

@@ -1,9 +1,11 @@
 package model.Hibernate;
 
-import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
 import model.dao.PacienteDao;
 import model.entidades.Paciente;
 import org.hibernate.HibernateException;
@@ -18,7 +20,6 @@ public class PacienteHibernate implements PacienteDao {
             em.getTransaction().begin();
             em.persist(paciente);
             em.getTransaction().commit();
-            
         } catch (HibernateException e) {
             em.getTransaction().rollback();
             
@@ -68,73 +69,69 @@ public class PacienteHibernate implements PacienteDao {
 
     @Override
     public Paciente buscarPeloCPF(String cpf) {
-        Paciente paciente = null;
-        String jpql = "from Paciente where cpf = :cpf";
+    	TypedQuery<Paciente> paciente;
         try {
-            Query query = this.em.createQuery(jpql);
-            query.setParameter("cpf", cpf);
-            paciente = (Paciente)query.getSingleResult();
-            
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao buscar pelo paciente.");
-        }  finally {
-            em.close();
-        }
-        return paciente;
+        paciente = em.createQuery("select distinct (p) from Paciente as p where p.cpf = ?1",Paciente.class);
+        paciente.setParameter(1, cpf);       
+        return paciente.getSingleResult();    
+        } catch(NoResultException e){
+            return null;
+        } 
     }
 
-    @Override
+	@Override
     public long buscarPeloID(long id) {
         return 1l;
     }
 
     @Override
     public List<Paciente> buscarPorCidade(String cidade) {
-        List <Paciente> pacientes = null;
+        List <Paciente> pacientes = new ArrayList<>();
         String jpql = "from Paciente where cidade = :cidade";
         try {
-            Query query = this.em.createQuery(jpql);
+            TypedQuery<Paciente> query = em.createQuery(jpql,Paciente.class);
             query.setParameter("cidade", cidade);
-            pacientes = (List<Paciente>)query.getResultList();
-            
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao listar pacientes.");
-        }  finally {
-            em.close();
-        }
+            pacientes =  query.getResultList();         
+        } catch(NoResultException e){
+//        	NoResultException("Não foi obitido resultdos do banco.");
+            return null;
+        } // finally {
+//            em.close();
+//        }
         return pacientes;
     }
 
     @Override
     public List<Paciente> buscarPorEstado(String estado) {
-       List <Paciente> pacientes = null;
-        String jpql = "from Paciente where cidade = :estado";
+       List <Paciente> pacientes = new ArrayList<>();
+        String jpql = "from Paciente where estado = :estado";
         try {
-            Query query = this.em.createQuery(jpql);
+            TypedQuery<Paciente> query = em.createQuery(jpql,Paciente.class);
             query.setParameter("estado", estado);
-            pacientes = (List<Paciente>)query.getResultList();
+            pacientes = query.getResultList();
             
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao listar pacientes.");
-        }  finally {
-            em.close();
-        }
+        } catch(NoResultException e){
+//        	NoResultException("Não foi obitido resultdos do banco.");
+            return null;
+        }  //finally {
+//            em.close();
+//        }
         return pacientes;
     }
 
     @Override
     public List<Paciente> listarTodos() {
-        List <Paciente> pacientes = null;
+        List <Paciente> pacientes = new ArrayList<>();
         String jpql = "from Paciente";
         try {
-            Query query = this.em.createQuery(jpql);
-            pacientes = (List<Paciente>)query.getResultList();
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao listar pacientes.");
-        }  finally {
-            em.close();
-        }
+            TypedQuery<Paciente> query = em.createQuery(jpql,Paciente.class);
+            pacientes = query.getResultList();
+        } catch(NoResultException e){
+//        	NoResultException("Não foi obitido resultdos do banco.");
+            return null;
+        } // finally {
+//            em.close();
+//        }
         return pacientes;
     }
-
 }

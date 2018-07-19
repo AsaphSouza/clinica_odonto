@@ -1,8 +1,9 @@
 package model.Hibernate;
 
-import java.security.InvalidParameterException;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
 import model.dao.AssistenteDAO;
 import model.entidades.Assistente;
 import org.hibernate.HibernateException;
@@ -66,19 +67,14 @@ public class AssistenteHibernate implements AssistenteDAO{
 
     @Override
     public Assistente buscarPorNome(String nome) {
-        Assistente assistente = null;
-        String jpql = "from Assistente where nome = :nome";
+        TypedQuery<Assistente> query; 
         try {
-            Query query = this.em.createQuery(jpql);
+        	query = em.createQuery("from Assistente where nome = :nome",Assistente.class);
             query.setParameter("nome", nome);
-            assistente = (Assistente)query.getSingleResult();
-            
-        } catch(HibernateException e){
-            throw new InvalidParameterException("Erro ao buscar pelo assistente.");
-        }  finally {
-            em.close();
+            return  query.getSingleResult();
+        } catch(NoResultException e){
+            return null;
         }
-        return assistente;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package model.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -73,6 +74,9 @@ public class Paciente implements Serializable {
     
     public Paciente(String nome, char sexo,String telefone, Date dataNascimento, String cpf,
             String profissao, String email, Endereco endereco, boolean utilizaMedicamento) {
+    	consultas = new ArrayList<>();
+    	exames = new ArrayList<>();
+    	listaMedicamentos = new ArrayList<>();
         this.nome = nome;
         this.sexo = sexo;
         this.telefone = telefone;

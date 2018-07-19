@@ -1,6 +1,7 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
   version="2.1">
 
 
@@ -24,7 +25,7 @@
 			<property name="hibernate.jdbc.batch_size" value="50"/>
 			<property name="hibernate.cache.user_query_cache" value="true"/>
 			<property name="hibernate.generate_statistics" value="true"/>
-			<property name="hibernate.hbm2ddl.auto" value="none"/>
+			<property name="hibernate.hbm2ddl.auto" value= "none"/>
 						     		
 		</properties>
 

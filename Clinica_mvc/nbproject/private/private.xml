@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/Hibernate/DentistaHibernate.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/dao/DAO.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerPaciente.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/conf/persistence.xml</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/Hibernate/PacienteHibernate.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/dao/PacienteDao.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/entidades/Paciente.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/entidades/Dentista.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/PacienteModel.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/test/testes/MainTeste.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/hibernate.cfg.xml</file>
         </group>
     </open-files>
 </project-private>

@@ -1,11 +1,12 @@
 package Controller;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
 import model.PacienteModel;
 import model.entidades.Endereco;
 import model.entidades.Paciente;
@@ -15,19 +16,15 @@ import org.hibernate.HibernateException;
 @SessionScoped
 public class ControllerPaciente {
 
-    PacienteModel pacienteModel;
-    private final EntityManager ENTITY_MANAGER;
-    private List<Paciente> listaPaciente;
-    private Paciente paciente;
-    private Endereco endereco;
+    private PacienteModel pacienteModel = new PacienteModel();
+    private List<Paciente> listaPaciente = new ArrayList<>();
+    private Paciente paciente = new Paciente();
+    private Endereco endereco = new Endereco();
 
-    public ControllerPaciente(Paciente paciente, PacienteModel pacienteModel, 
-            EntityManager entityManager) {
-        this.paciente = new Paciente();
-        this.pacienteModel = pacienteModel;
-        this.ENTITY_MANAGER = entityManager;
+    public ControllerPaciente() {
+    	
     }
-
+    
     public Endereco getEndereco() {
         return endereco;
     }
@@ -64,13 +61,9 @@ public class ControllerPaciente {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             pacienteModel.inserirPaciente(paciente);
-            context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
-        } catch (HibernateException e) {
+//            context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
+        } catch (HibernateException | InvalidParameterException e) {
             context.addMessage(null, new FacesMessage(e.getMessage()));
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
 
     }
@@ -81,9 +74,7 @@ public class ControllerPaciente {
             pacienteModel.deletarPaciente(paciente);
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
-        }
+        } 
     }
     
     public void atualizarPaciente(Paciente paciente) {
@@ -92,24 +83,21 @@ public class ControllerPaciente {
             pacienteModel.atualizarPaciente(paciente);
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
-        }
+        } 
     }
     
     public Paciente buscarPacienteCPF (String cpf) {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
            paciente = pacienteModel.buscarpPorCPF(cpf);
+           return paciente;
         } catch (HibernateException ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
             paciente = null;
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
             paciente = null;
-        } finally {
-            ENTITY_MANAGER.close();
-        }
+        } 
         return paciente;
     }
     
@@ -122,8 +110,6 @@ public class ControllerPaciente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }
@@ -137,8 +123,6 @@ public class ControllerPaciente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }
@@ -152,8 +136,6 @@ public class ControllerPaciente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         } catch (Exception e){
             context.addMessage(null, new FacesMessage(e.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
         return listaPaciente;
     }

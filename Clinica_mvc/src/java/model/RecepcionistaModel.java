@@ -1,74 +1,51 @@
 package model;
 
 import model.entidades.Recepcionista;
-import model.entidades.Paciente;
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.List;
+import model.Hibernate.RecepcionistaHibernate;
+import model.dao.RecepcionistaDao;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 public class RecepcionistaModel {
-
-	private List<Recepcionista> lista;
-
-	// Exames e = new Exames(0, null, null, null);
-	// Consulta c = new Consulta();
-	public void marcarConsulta(Paciente paciente) {
-
+	private RecepcionistaDao recepcionistaDao;
+	
+	public RecepcionistaModel () {
+		recepcionistaDao = new RecepcionistaHibernate();
 	}
-
-	public void marcarExame(Paciente paciente) {
-
-	}
-
-	public void cancelarEC(Paciente paciente) {
-
-	}
-
-	public RecepcionistaModel() {
-		this.lista = new ArrayList<>();
-	}
-
-	public void inserirRecepcionista(Recepcionista recepcionista) {
-
-		Recepcionista r = pegar(recepcionista);
-		if (r == null) {
-			lista.add(recepcionista);
-		} else {
-			throw new InvalidParameterException("Recepcionista j� existe");
-		}
-
-	}
-
-	public void atualizarRecepcionista(Recepcionista r) {
-		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).equals(r)) {
-				lista.set(i, r);
-				return;
+	
+	public void inserirRecepcionista (Recepcionista recepcionista) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			if (recepcionistaDao.BuscarPorNome(recepcionista.getNome()) == null) {
+				recepcionistaDao.inserir(recepcionista);
 			}
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao inserir recepcionista."));
 		}
-
-		throw new InvalidParameterException("Recepcionista n�o existe");
 	}
-
-	public void deletarRecepcionista(Recepcionista r) {
-
-		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).equals(r)) {
-				lista.remove(i);
-				return;
-			}
+	public void atualizarRecepcionista(Recepcionista recepcionista) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			recepcionistaDao.atualizar(recepcionista);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao atualizar recepcionista."));
 		}
-
-		throw new InvalidParameterException("Recepcionista n�o existe");
 	}
-
-	private Recepcionista pegar(Recepcionista r) {
-		for (Recepcionista recepcionista : lista) {
-			if (recepcionista.equals(r))
-				return recepcionista;
+	public void deletarRecepcionista (Recepcionista recepcionista) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			recepcionistaDao.deletar(recepcionista);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao deletar recepcionista."));
 		}
-
-		return null;
 	}
-
+	public Recepcionista buscarPeloNome (String nome) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			return recepcionistaDao.BuscarPorNome(nome);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao buscar por nome."));
+			return null;
+		}
+	}
 }

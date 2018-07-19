@@ -1,6 +1,8 @@
 package model.Hibernate;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import model.dao.MedicamentoDAO;
 import model.entidades.Medicamento;
 import org.hibernate.HibernateException;
@@ -65,7 +67,14 @@ public class MedicamentoHibernate implements MedicamentoDAO{
 
     @Override
     public Medicamento buscarPorNome(String nome) {
-        return null;
+        TypedQuery<Medicamento> query;
+        try {
+            query = em.createQuery("from Medicamento where nome = :nome",Medicamento.class);
+            query.setParameter("nome", nome);
+            return  query.getSingleResult();
+        } catch(NoResultException e){
+            return null;
+        }
     }
 
     public long buscarPeloID(long id) {

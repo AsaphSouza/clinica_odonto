@@ -1,5 +1,6 @@
 package testes;
 
+import Controller.ControllerPaciente;
 import model.entidades.Assistente;
 import model.entidades.Consulta;
 import model.entidades.Dentista;
@@ -23,11 +24,16 @@ public class MainTeste {
 
         try {
 
-            em.getTransaction().begin();
+          ControllerPaciente cp = new ControllerPaciente();
+          Endereco endereco = new Endereco("Garanhuns", "Brasil", "Pernambuco", "Rua i", "Casa",22,"Severiano Moraes Filho");
+          Calendar c = Calendar.getInstance();
+          c.set(1999, 06, 1); // no mes tem que colocar um a menos 
+          Paciente pac = new Paciente("Alexander",'M', "87999999999",c.getTime() ,"90408747005",
+                  "Programador Pleno","alexander@gmail.com", endereco, false);
+          cp.cadastrarPaciente(pac);
+          
+          //System.out.println(cp.buscarPacienteCPF("88877766655"));
 
-            testePersistencia(em);
-
-            em.getTransaction().commit();
 
         } catch (Throwable e) {
             e.printStackTrace();
@@ -37,20 +43,6 @@ public class MainTeste {
             em.close();
             emf.close();
         }
-
-    }
-
-    private static void testePersistencia(EntityManager em) {
-        
-//          Endereco endereco = new Endereco("Garanhuns", "Brasil", "Pernambuco", "Brás Cubas", "Casa",635,"Heliópolis");
-//          Calendar c = Calendar.getInstance();
-//          c.set(1999, 11, 1); // no mes tem que colocar um a menos 
-//          Paciente pac = new Paciente("Carine Wanderley",'F', "87999168963",c.getTime() ,"11740635485",
-//                  "Programadora Senior","carine.wp@hotmail.com", endereco, false);
-//          System.out.println(pac);
-//          em.persist(pac);
-//          System.out.println(pac);
-//            
 
     }
 

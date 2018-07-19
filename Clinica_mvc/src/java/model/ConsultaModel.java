@@ -3,24 +3,18 @@ package model;
 import model.dao.ConsultaDao;
 import model.Hibernate.ConsultaHibernate;
 import model.entidades.Consulta;
-import java.security.InvalidParameterException;
+import java.sql.Date;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 public class ConsultaModel {
 
     private ConsultaDao dao;
-    private List<Consulta> lista;
 
     public ConsultaModel() {
         this.dao = new ConsultaHibernate();
-    }
-
-    public List<Consulta> getLista() {
-        return lista;
-    }
-
-    public void setLista(List<Consulta> lista) {
-        this.lista = lista;
     }
 
     public void emissaoAtestado() {
@@ -36,47 +30,60 @@ public class ConsultaModel {
     }
 
     public void inserirConsulta(Consulta consulta) {
-
-        Consulta c = pegar(consulta);
-        if (c == null) {
-            lista.add(consulta);
-        } else {
-            throw new InvalidParameterException("Consulta j� existe");
-        }
-
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			dao.inserir(consulta);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao inserir consulta."));
+		}
     }
 
-    public void atualizarConsulta(Consulta c) {
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).equals(c)) {
-                lista.set(i, c);
-                return;
-            }
-        }
-
-        throw new InvalidParameterException("Consulta n�o existe");
+    public void atualizarConsulta(Consulta consulta) {
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			dao.atualizar(consulta);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao atualizar consulta."));
+		}
     }
 
     public void deletarConsulta(Consulta c) {
-
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).equals(c)) {
-                lista.remove(i);
-                return;
-            }
-        }
-
-        throw new InvalidParameterException("Consulta n�o existe");
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			dao.deletar(c);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao deletar consulta."));
+		}
     }
 
-    private Consulta pegar(Consulta c) {
-        for (Consulta consulta : lista) {
-            if (c.equals(c)) {
-                return consulta;
-            }
-        }
-
-        return null;
+    public List<Consulta> buscarPeloDia (Date data) {
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			return dao.buscarPorDia(data);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao buscar consulta por dia."));
+			return null;
+		}
+    }
+    
+    public List<Consulta> buscarPeloPeriodo (Date inicial, Date dfinal) {
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			return dao.buscarPorPeriodo(inicial, dfinal);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao buscar por período."));
+			return null;
+		}
+    }
+    
+    public List<Consulta> buscarPeloMes (Date data) {
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	try {
+			return dao.buscarPorMes(data);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Erro ao buscar por mes."));
+			return null;
+		}
     }
 
 }

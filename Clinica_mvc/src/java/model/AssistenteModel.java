@@ -1,52 +1,56 @@
 package model;
 
-import java.security.InvalidParameterException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import model.Hibernate.AssistenteHibernate;
 import model.dao.AssistenteDAO;
 import model.entidades.Assistente;
-import org.hibernate.HibernateException;
 
 public class AssistenteModel {
-    private final AssistenteDAO ASSISTENTE_DAO;
+    private AssistenteDAO assistenteDao;
     
     public AssistenteModel () {
-        this.ASSISTENTE_DAO = new AssistenteHibernate();
+        this.assistenteDao = new AssistenteHibernate();
     }
     
     public void inserirAssistente(Assistente assistente) {
+    	FacesContext context = FacesContext.getCurrentInstance();
         try {
-            if (ASSISTENTE_DAO.buscarPorNome(assistente.getNome()) == null) {
-            ASSISTENTE_DAO.inserir(assistente);
+            if (assistenteDao.buscarPorNome(assistente.getNome()) == null) {
+            assistenteDao.inserir(assistente);
         } else {
-            throw new InvalidParameterException("Assistente já existe na base de dados.");
+            context.addMessage(null, new FacesMessage("Assistente já cadastrado."));
         }
-        } catch (HibernateException e) {
-            throw new InvalidParameterException("Erro na base de dados.");
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage("Erro na base de dados."));
         }
     }
     
     public void atualizarAssistente (Assistente assistente) {
+    	FacesContext context = FacesContext.getCurrentInstance();
         try {
-            ASSISTENTE_DAO.atualizar(assistente);
+            assistenteDao.atualizar(assistente);
         } catch (Exception e) {
-            throw new InvalidParameterException("Erro ao atualizar Assistente.");
+            context.addMessage(null, new FacesMessage("Erro ao atualizar Assistente."));
         }
     }
     
     public void deletarAssistente (Assistente assistente) {
+    	FacesContext context = FacesContext.getCurrentInstance();
         try {
-            ASSISTENTE_DAO.deletar(assistente);
+            assistenteDao.deletar(assistente);
         } catch (Exception e) {
-            throw new InvalidParameterException("Erro ao deltetar Assistente.");
+            context.addMessage(null, new FacesMessage("Erro ao deletar Assistente."));
         }
     }
     
     public Assistente buscarAssistente (String nome) {
+    	FacesContext context = FacesContext.getCurrentInstance();
         try {
-            ASSISTENTE_DAO.buscarPorNome(nome);
+            return assistenteDao.buscarPorNome(nome);
         } catch (Exception e) {
-            throw new InvalidParameterException("Erro ao buscar Assistente.");
+            context.addMessage(null, new FacesMessage("Erro ao buscar Assistente."));
+            return null;
         }
-        return null;
     }
 }
