@@ -1,67 +1,87 @@
 package Controller;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
 import model.AssistenteModel;
 import model.entidades.Assistente;
 import org.hibernate.HibernateException;
 
+@ManagedBean
+@SessionScoped
 public class ControllerAssistente {
     private AssistenteModel assistenteModel;
     private Assistente assistente;
-    private final EntityManager ENTITY_MANAGER;
+    private String nome;
     
-    public ControllerAssistente (EntityManager entityManager) {
-        this.ENTITY_MANAGER = entityManager; 
+    public ControllerAssistente () {
+    	assistenteModel = new AssistenteModel();
+    	assistente = new Assistente();
     }
     
-    public void cadastrarAssitente (Assistente assistente) {
+    public void cadastrarAssitente () {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.inserirAssistente(assistente);
-            context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
+            //context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
         } catch (HibernateException e) {
             context.addMessage(null, new FacesMessage(e.getMessage()));
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
     }
     
-    public void deletarAssistente (Assistente assistente) {
+    public void deletarAssistente () {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.deletarAssistente(assistente);
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
     }
     
-    public void atualizarAssistente (Assistente assistente) {
+    public void atualizarAssistente () {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.atualizarAssistente(assistente);
         } catch (Exception ex) {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } finally {
-            ENTITY_MANAGER.close();
         }
     }
     
-    public Assistente buscarPorNome (String nome) {
+    public Assistente buscarPorNome () {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            assistente = assistenteModel.buscarAssistente(nome);
+            return assistenteModel.buscarAssistente(nome);
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage(e.getMessage()));
-            assistente = null;
-        } finally {
-            ENTITY_MANAGER.close();
+            return  null;
         }
-        return assistente;
     }
+
+	public AssistenteModel getAssistenteModel() {
+		return assistenteModel;
+	}
+
+	public void setAssistenteModel(AssistenteModel assistenteModel) {
+		this.assistenteModel = assistenteModel;
+	}
+
+	public Assistente getAssistente() {
+		return assistente;
+	}
+
+	public void setAssistente(Assistente assistente) {
+		this.assistente = assistente;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+    
 }

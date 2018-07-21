@@ -1,7 +1,5 @@
 package Controller;
 
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,27 +8,88 @@ import javax.faces.context.FacesContext;
 import model.PacienteModel;
 import model.entidades.Endereco;
 import model.entidades.Paciente;
-import org.hibernate.HibernateException;
 
 @ManagedBean
 @SessionScoped
 public class ControllerPaciente {
 
-    private PacienteModel pacienteModel = new PacienteModel();
-    private List<Paciente> listaPaciente = new ArrayList<>();
-    private Paciente paciente = new Paciente();
-    private Endereco endereco = new Endereco();
+    private PacienteModel pacienteModel; 
+    private Paciente paciente;
+    private String cpf;
+    private Endereco endereco;
 
     public ControllerPaciente() {
-    	
+    	pacienteModel = new PacienteModel();
+    	paciente  = new Paciente();
+    	endereco = new Endereco();
     }
     
-    public Endereco getEndereco() {
-        return endereco;
+	public void cadastrarPaciente() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            pacienteModel.inserirPaciente(paciente);
+//            context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+        }
     }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    
+    public void deletarPaciente() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            pacienteModel.deletarPaciente(paciente);
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } 
+    }
+    
+    public void atualizarPaciente() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            pacienteModel.atualizarPaciente(paciente);
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(ex.getMessage()));
+        } 
+    }
+    
+    public Paciente buscarPacienteCPF () {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           return pacienteModel.buscarpPorCPF(cpf);
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            return  null;
+        }
+    }
+    
+    public List<Paciente> buscarPorCidades () {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           return pacienteModel.buscarPcidade(endereco.getCidade());
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
+    
+    public List<Paciente> buscarPorEstado () {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           return pacienteModel.buscarPestado(endereco.getEstado());
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            return null;
+        }
+    }
+    
+    public List<Paciente> buscarTodos () {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+           return  pacienteModel.listarPacientes();
+        } catch (Exception e){
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            return null;
+        }
     }
     
     public PacienteModel getPacienteModel() {
@@ -41,14 +100,6 @@ public class ControllerPaciente {
         this.pacienteModel = pacienteModel;
     }
 
-    public List<Paciente> getListaPaciente() {
-        return listaPaciente;
-    }
-
-    public void setListaPaciente(List<Paciente> listaPaciente) {
-        this.listaPaciente = listaPaciente;
-    }
-
     public Paciente getPaciente() {
         return paciente;
     }
@@ -56,87 +107,23 @@ public class ControllerPaciente {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+    
+    public String getCpf() {
+		return cpf;
+	}
 
-    public void cadastrarPaciente(Paciente paciente) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            pacienteModel.inserirPaciente(paciente);
-//            context.addMessage(null, new FacesMessage("Cadastro Efetuado!"));
-        } catch (HibernateException | InvalidParameterException e) {
-            context.addMessage(null, new FacesMessage(e.getMessage()));
-        }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    }
-    
-    public void deletarPaciente(Paciente paciente) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            pacienteModel.deletarPaciente(paciente);
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } 
-    }
-    
-    public void atualizarPaciente(Paciente paciente) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-            pacienteModel.atualizarPaciente(paciente);
-        } catch (Exception ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } 
-    }
-    
-    public Paciente buscarPacienteCPF (String cpf) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-           paciente = pacienteModel.buscarpPorCPF(cpf);
-           return paciente;
-        } catch (HibernateException ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-            paciente = null;
-        } catch (Exception e){
-            context.addMessage(null, new FacesMessage(e.getMessage()));
-            paciente = null;
-        } 
-        return paciente;
-    }
-    
-    public List<Paciente> buscarPorCidades (String cidade) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-           this.listaPaciente = null;
-           this.listaPaciente = pacienteModel.buscarPcidade(cidade);
-        } catch (HibernateException ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } catch (Exception e){
-            context.addMessage(null, new FacesMessage(e.getMessage()));
-        }
-        return listaPaciente;
-    }
-    
-    public List<Paciente> buscarPorEstado (String estado) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-           this.listaPaciente = null;
-           this.listaPaciente = pacienteModel.buscarPestado(estado);
-        } catch (HibernateException ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } catch (Exception e){
-            context.addMessage(null, new FacesMessage(e.getMessage()));
-        }
-        return listaPaciente;
-    }
-    
-    public List<Paciente> buscarTodos () {
-        FacesContext context = FacesContext.getCurrentInstance();
-        try {
-           this.listaPaciente = null;
-           this.listaPaciente = pacienteModel.listarPacientes();
-        } catch (HibernateException ex) {
-            context.addMessage(null, new FacesMessage(ex.getMessage()));
-        } catch (Exception e){
-            context.addMessage(null, new FacesMessage(e.getMessage()));
-        }
-        return listaPaciente;
-    }
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	
+
 }

@@ -2,7 +2,6 @@ package model;
 
 import model.entidades.Paciente;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -14,7 +13,6 @@ import org.hibernate.HibernateException;
 
 public class PacienteModel {
 
-	private List<Paciente> lista;
 	private PacienteDao pacienteDao;
 	private CPF cpf;
 
@@ -31,21 +29,20 @@ public class PacienteModel {
 
 	public List<Paciente> listarPacientes() {
 		try {
-			lista = new ArrayList<>();
-			this.lista = pacienteDao.listarTodos();
+			return pacienteDao.listarTodos();
 		} catch (Exception e) {
 			throw new InvalidParameterException("Erro ao listar pacientes.");
 		}
-		return lista;
 	}
 
 	 public PacienteModel() {
 	 this.pacienteDao = new PacienteHibernate();
+	 this.cpf = new CPF();
 	
 	 }
 
 	public void inserirPaciente(Paciente paciente) {
-		cpf = new CPF();
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			if (cpf.validarCpf(paciente.getCpf()) == false) {
@@ -85,8 +82,8 @@ public class PacienteModel {
 			return pacienteDao.buscarPeloCPF(cpf);
 			} catch (Exception e) {
 				context.addMessage(null, new FacesMessage("Falha ao procurar pelo cpf"));
+				return null;
 		 }
-		return null;
 	}
 
 	// não está sendo usado

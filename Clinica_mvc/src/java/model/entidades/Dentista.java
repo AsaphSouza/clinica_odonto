@@ -18,7 +18,7 @@ public class Dentista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDentista", nullable = false)
+    @Column(name = "iddentista", nullable = false)
     private Long id;
     
     @Column(name = "cro", nullable = false)
@@ -43,9 +43,9 @@ public class Dentista implements Serializable {
     }
     
     public Dentista (String cro, String nome, String formacao) {
-	this.cro = cro;
-	this.nome = nome;
-	this.formacao = formacao;
+		this.cro = cro;
+		this.nome = nome;
+		this.formacao = formacao;
     }
 
     public Long getId() {

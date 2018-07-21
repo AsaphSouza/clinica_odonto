@@ -71,8 +71,8 @@ public class PacienteHibernate implements PacienteDao {
     public Paciente buscarPeloCPF(String cpf) {
     	TypedQuery<Paciente> paciente;
         try {
-        paciente = em.createQuery("select distinct (p) from Paciente as p where p.cpf = ?1",Paciente.class);
-        paciente.setParameter(1, cpf);       
+        paciente = em.createQuery("from Paciente where cpf = :cpf",Paciente.class);
+        paciente.setParameter("cpf", cpf);       
         return paciente.getSingleResult();    
         } catch(NoResultException e){
             return null;
@@ -93,11 +93,8 @@ public class PacienteHibernate implements PacienteDao {
             query.setParameter("cidade", cidade);
             pacientes =  query.getResultList();         
         } catch(NoResultException e){
-//        	NoResultException("Não foi obitido resultdos do banco.");
             return null;
-        } // finally {
-//            em.close();
-//        }
+        } 
         return pacientes;
     }
 
@@ -111,11 +108,8 @@ public class PacienteHibernate implements PacienteDao {
             pacientes = query.getResultList();
             
         } catch(NoResultException e){
-//        	NoResultException("Não foi obitido resultdos do banco.");
             return null;
-        }  //finally {
-//            em.close();
-//        }
+        } 
         return pacientes;
     }
 
@@ -127,11 +121,8 @@ public class PacienteHibernate implements PacienteDao {
             TypedQuery<Paciente> query = em.createQuery(jpql,Paciente.class);
             pacientes = query.getResultList();
         } catch(NoResultException e){
-//        	NoResultException("Não foi obitido resultdos do banco.");
             return null;
-        } // finally {
-//            em.close();
-//        }
+        }
         return pacientes;
     }
 }
