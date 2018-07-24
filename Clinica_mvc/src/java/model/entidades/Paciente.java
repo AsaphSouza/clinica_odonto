@@ -39,7 +39,7 @@ public class Paciente implements Serializable {
     private String telefone;
     
     @Column(name = "nascimento", nullable = false)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
     
     @Column(name = "cpf", nullable = false)
