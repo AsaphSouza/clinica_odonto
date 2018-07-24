@@ -70,6 +70,7 @@ public class Paciente implements Serializable {
     private List<Consulta> consultas;
 
     public Paciente() {
+        endereco = new Endereco();
     }
     
     public Paciente(String nome, char sexo,String telefone, Date dataNascimento, String cpf,

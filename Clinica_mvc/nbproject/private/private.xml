@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerDentista.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/UsuarioModel.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerUsuario.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerPaciente.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/entidades/Paciente.java</file>
-            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/PacienteModel.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerAdministrador.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/entidades/Usuario.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/model/Hibernate/UsuarioHibernate.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/Controller/ControllerAssistente.java</file>
             <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/src/java/teste/Teste.java</file>
+            <file>file:/C:/Users/asaph/Desktop/git/local/Clinica_mvc/web/BuscaPaciente.xhtml</file>
         </group>
     </open-files>
 </project-private>

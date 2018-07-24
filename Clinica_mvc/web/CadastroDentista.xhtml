@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <title>Cadastro De Dentistas</title>
+
+        <p:graphicImage library="imagem" name="sophie-turner.jpg" height="550px" width="350px" style="float: left;clear: right"/>
+
+    </h:head>
+
+
+    <h:body>
+
+        <div id="dados pessoais" style="float: left;clear: right;position: relative;left: 3%;">
+
+            <h:form>
+
+                <h1>TELA DE CADASTRO</h1>
+                <br></br>
+
+                <p:messages autoUpdate="true" id="msg" />
+
+                Cadastro De Dentistas
+
+
+                <p:panelGrid columns="2" style="background-color: #e50909;width: 120%;height: 120%">
+
+
+                    <p:outputLabel  value="Nome : *"/>
+                    <p:inputText value="#{controllerDentista.dentista.nome}" required="true" requiredMessage="O nome é obrigatório"/>
+
+                    <p:outputLabel  value="Formação : *"/>
+                    <p:inputText value="#{controllerDentista.dentista.formacao}" required="true" requiredMessage="A Formação é obrigatória"/>
+                   
+                    <p:outputLabel  value="cro : *"/>
+                    <p:inputText value="#{controllerDentista.dentista.cro}" required="true" requiredMessage="O cro é obrigatório"/>
+                    
+                    <h:commandButton value="cadastrar" actionListener="#{controllerDentista.cadastrarDentista()}" />
+
+                    <!--<p:commandButton value="voltar" action="#{controllerAssistente.assistente}"/>-->
+                </p:panelGrid>
+
+                
+            </h:form>
+        </div>
+        
+         
+
+    </h:body>
+
+</html>

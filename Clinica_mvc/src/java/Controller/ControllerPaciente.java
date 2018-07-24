@@ -21,7 +21,6 @@ public class ControllerPaciente {
     public ControllerPaciente() {
     	pacienteModel = new PacienteModel();
     	paciente  = new Paciente();
-    	endereco = new Endereco();
     }
     
 	public void cadastrarPaciente() {

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>BUSCA PACIENTE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h1>busque</h1>
+
+
+        <h:graphicImage library="imagem" name="dente.PNG" style="width: 20%;height: 20%"/>
+
+
+
+        <h:form id="listaPaciente">
+
+            <h3> CAMPOS DE BUSCA </h3>
+
+            <p:outputLabel value="CPF" />
+            <p:inputText value="#{controllerPaciente.cpf}"/>
+
+            <h:commandButton value="BUSCAR CPF" id="BuscarPaciente" action="#{controllerPaciente.buscarPacienteCPF()}"/>
+
+            <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+            <p:dataTable id="dtPaciente" value="#{controllerPaciente.buscarPacienteCPF()}" var="paciente">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{paciente.nome}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{paciente.cpf}" />
+                </p:column>
+
+                <p:column headerText="data de nascimento">
+                    <h:outputText value="#{paciente.dataNascimento}" />
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{paciente.telefone}" />
+                </p:column>
+
+            </p:dataTable>
+            <br/><br/>
+
+            <p:outputLabel value="buscar todos" />
+
+
+            <h:commandButton value="BUSCAR TODOS" id="BuscarTodos" action="#{controllerPaciente.buscarTodos()}" />
+
+            <p:growl id="growl2" showDetail="true" sticky="true" /> 
+
+            <p:dataTable id="dtTodos" value="#{controllerPaciente.buscarTodos()}" var="paciente">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{paciente.nome}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{paciente.cpf}" />
+                </p:column>
+
+                <p:column headerText="data de nascimento">
+                    <h:outputText value="#{paciente.dataNascimento}" />
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{paciente.telefone}" />
+                </p:column>
+
+            </p:dataTable>
+            <br/><br/>
+
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>BUSCA ASSISTENTE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h1>busque</h1>
+
+
+        <h:graphicImage library="imagem" name="dente.PNG" style="width: 20%;height: 20%"/>
+
+
+
+        <h:form id="listaAssistente">
+
+            <h3> CAMPOS DE BUSCA </h3>
+
+            <p:outputLabel value="Nome" />
+            <p:inputText value="#{controllerAssistente.nome}"/>
+
+
+            <p:commandButton value="Buscar" id="BuscarAssistente" action="#{controllerAssistente.buscarPorNome()}" update=":listaAssistente:dtAssistente"/>
+
+            <p:growl id="growl" showDetail="true" sticky="true" /> 
+            <p:dataTable id="dtAssistente" value="#{controllerAssistente.buscarPorNome()}" var="assistente">
+
+                <p:column headerText="Assistente">
+                    <h:outputText value="#{assistente.nome}" />
+                </p:column>
+
+                <p:column headerText="Formação">
+                    <h:outputText value="#{assistente.formacao}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </h:body>
+</html>

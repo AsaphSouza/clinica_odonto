@@ -1,4 +1,3 @@
-
 package Controller;
 
 import java.io.IOException;
@@ -13,18 +12,7 @@ public class ControllerAdministrador {
     
     Paciente paciente;
     
-    public void checkUsuarioSession() throws IOException{
-        if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idPaciente") != null){
-            int idPaciente = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idPaciente").toString());
-            if(paciente == null)
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/Paciente/");
-        }else{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/Paciente/");
-        }
-    }
-    
-    
-    public void PaginaLogin() {
+    public void paginaLogin() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
@@ -34,57 +22,47 @@ public class ControllerAdministrador {
         }
     }
 
-    public void PaginaAssistente() {
+    public void paginaCadastroAssistente() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
-            context.getExternalContext().redirect("Assistente.xhtml");
+            context.getExternalContext().redirect("CadastroAssistente.xhtml");
         } catch (IOException e) {
 
         }
     }
     
-    public void PaginaDentista() {
+    public void paginaDentista() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
-            context.getExternalContext().redirect("Medico.xhtml");
+            context.getExternalContext().redirect("CadastroDentista.xhtml");
         } catch (IOException e) {
 
         }
     }
     
-    public void PaginaPaciente() {
+    public void paginaCadastroPaciente() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
-            context.getExternalContext().redirect("Paciente.xhtml");
+            context.getExternalContext().redirect("CadastroPaciente.xhtml");
         } catch (IOException e) {
 
         }
     }
     
-    public void PaginaRecepcionista() {
+    public void paginaRecepcionista() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
-            context.getExternalContext().redirect("Recepcionista.xhtml");
+            context.getExternalContext().redirect("CadastroRecepcionista.xhtml");
         } catch (IOException e) {
 
         }
     }
     
-    public void PaginaConsultasPaciente() {
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        try {
-            context.getExternalContext().redirect("ConsultasPaciente.xhtml");
-        } catch (IOException e) {
-
-        }
-    }
-    
-    public void PaginaReceitaseAtestados() {
+    public void paginaConsultasPaciente() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {
@@ -94,7 +72,17 @@ public class ControllerAdministrador {
         }
     }
     
-    public void PaginaExames() {
+    public void paginaReceitaseAtestados() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        try {
+            context.getExternalContext().redirect("ConsultasPaciente.xhtml");
+        } catch (IOException e) {
+
+        }
+    }
+    
+    public void paginaExames() {
         FacesContext context = FacesContext.getCurrentInstance();
 
         try {

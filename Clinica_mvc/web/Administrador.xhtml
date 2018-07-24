@@ -1,16 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <title>Adm Clini-Odonto</title>
+
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:graphicImage library="imagem" name="adm.jpg" height="288" width="1349"/>
+
+            <p:menubar>
+
+                <p:submenu label="Cadastros">
+
+                    <p:menuitem value="Recepcionista" action="#{controllerAdministrador.paginaRecepcionista()}" />
+
+                    <p:menuitem value="Assistente" action="#{controllerAdministrador.paginaCadastroAssistente()}"/>
+
+                    <p:menuitem value="Dentista" action="#{controllerAdministrador.paginaDentista()}"/>
+
+                </p:submenu>
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Procurar"/>
+                    <h:commandButton  value="Sair" action="#{controllerSessaoUsuario.deslogar()}" />
+                </f:facet>
+
+            </p:menubar>
+
+            <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+            <br></br><br></br><br></br><br></br> 
+
+            <p:dataTable id="dtPaciente" value="#{controllerPaciente.paciente}" var="paciente">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{paciente.nome}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{paciente.cpf}" />
+                </p:column>
+
+                <p:column headerText="data de nascimento">
+                    <h:outputText value="#{paciente.dataNascimento}" />
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{paciente.telefone}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </h:body>
+
 </html>

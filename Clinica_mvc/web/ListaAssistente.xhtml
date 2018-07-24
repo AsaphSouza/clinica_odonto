@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >                
+
+    <h:head>
+        <title>Consultas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+
+<!--       <h:form >
+           <div style="position: relative;float: top;top: 5%;left: 10%;">
+                <p:commandButton value = " Cadastrar "  action = " #{controllerAdministrador.paginaCadastroAssistente()}" />
+
+                <p:commandButton  value = " Menu "  action = " #{controllerAdministrador.paginaLogin} " />
+
+
+            </div >
+        </h:form >-->
+
+
+        <div style="border: solid 1px black">
+
+            <h:form id="lista">
+
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                <p:dataTable id="dtAssistente" value="#{controllerAssistente.buscarPorNome()}" var="assistente">
+
+                    <p:column>
+                        <h:outputText value="#{assistente.nome}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{assistente.formacao}" />
+                    </p:column>
+<!--                    <h:column >
+                        <h:outputText value="#{assistente.consultas}" />
+                    </h:column>-->
+                    
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <h:commandLink value="remover" action="#{controllerAssistente.deletarAssistente()}"
+                                       onclick="if (!confirm('Deseja realmente remover este(a) Assistente?')) {
+                                               return false;
+                                           }">
+                            <f:setPropertyActionListener value="#{assistente}" target="#{controllerAssistente.assistente}"/>
+                        </h:commandLink> 
+                        <br/>
+                        <p:commandLink value="editar" oncomplete="PF('alterarAssistenteDialog').show()" update=":lista:dialogAlterar">
+                            <f:setPropertyActionListener value="#{Assistente}" target="#{controllerAssistente.assistente}"/>
+                        </p:commandLink>
+
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <p:dialog id="dialogAlterar" header="Alterar Assistente" widgetVar="alterarAssistenteDialog" modal="true" height="100">
+                <h:form>
+                    <h:panelGrid columns="2" >
+
+                        <h:outputLabel value="Nome" for="ipNome" />
+                        <h:inputText value="#{controllerAssistente.assistente.nome}" id="ipNome" />
+
+                        <h:outputLabel value="Formacao" for="ipFormacao" />
+                        <h:inputText value="#{controllerAssistente.assistente.formacao}" id="ipFormacao" />
+
+                       
+
+                        <h:commandButton value="Alterar" action="#{controllerAssistente.atualizarAssistente()}" />
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+
+        </div>
+    </h:body>
+
+</html>

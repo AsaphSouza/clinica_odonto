@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <h:head>
+        <title>Consultas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+
+        <!--        <h:form >
+                    <div style="position: relative;float: top;top: 5%;left: 10%;">
+        
+                        <p:commandButton value = " Cadastrar "  action = " #{controllerAdministrador.paginaCadastroPaciente()}" />
+        
+                        <p:commandButton  value = " Menu "  action = " #{controllerAdministrador.paginaLogin} " />
+        
+                    </div >
+                </h:form> -->
+
+
+
+        <h:form id="lista">
+
+            <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+            <p:dataTable id="dtPaciente" value="#{controllerPaciente.buscarTodos()}" var="paciente">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{paciente.nome}" />
+                </p:column>
+                <p:column headerText="cpf">
+                    <h:outputText value="#{paciente.cpf}" />
+                </p:column>
+                <p:column headerText="datadenascimento">
+                    <h:outputText value="#{paciente.dataNascimento}" />
+                </p:column>
+                <p:column headerText="email">
+                    <h:outputText value="#{paciente.email}" />
+                </p:column>
+                <p:column headerText="id">
+                    <h:outputText value="#{paciente.id}" />
+                </p:column >
+                <p:column headerText="profissão">
+                    <h:outputText value="#{paciente.profissao}" />
+                </p:column>
+                <p:column headerText="sexo">
+                    <h:outputText value="#{paciente.sexo}" />
+                </p:column>
+                <p:column headerText="telefone">
+                    <h:outputText value="#{paciente.telefone}" />
+                </p:column>
+                <p:column headerText="ultiliza medicamento">
+                    <h:outputText value="#{paciente.utilizaMedicamento}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Ações"/>
+                    </f:facet>
+                    <h:commandLink value="remover" action="#{controllerPaciente.deletarPaciente()}"
+                                   onclick="if (!confirm('Deseja realmente remover este paciente?')) {
+                                               return false;
+                                           }">
+                        <f:setPropertyActionListener value="#{paciente}" target="#{controllerPaciente.paciente}"/>
+                    </h:commandLink> 
+                    <br/>
+                    <p:commandLink value="editar" oncomplete="PF('alterarPacienteDialog').show()" update=":dialogAlterar">
+                        <f:setPropertyActionListener value="#{paciente}" target="#{controllerPaciente.paciente}"/>
+                    </p:commandLink>
+
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+        <p:dialog id="dialogAlterar" header="Alterar Paciente" widgetVar="alterarPacienteDialog" modal="true" height="100">
+            <h:form>
+                <h:panelGrid columns="2" >
+
+                    <h:outputLabel value="Nome" for="ipNome" />
+                    <h:inputText value="#{controllerPaciente.paciente.nome}" id="ipNome" /><!--controlladorPaciente.paciente.nome ??? -->
+
+                    <h:outputLabel value="Cpf" for="ipCpf" />
+                    <h:inputText value="#{controllerPaciente.paciente.cpf}" id="ipCpf" />
+
+                    <h:outputLabel value="dataNascimento" for="ipdataNascimento" />
+                    <h:inputText value="#{controllerPaciente.paciente.dataNascimento}" id="ipdataNascimento" />
+
+                    <h:outputLabel value="email" for="ipemail" />
+                    <h:inputText value="#{controllerPaciente.paciente.email}" id="ipemail" />
+
+                    <h:outputLabel value="exames" for="ipexames" />
+                    <h:inputText value="#{controllerPaciente.paciente.exames}" id="ipexames" />
+
+                    <h:outputLabel value="listaMedicamentos" for="iplistaMedicamentos" />
+                    <h:inputText value="#{controllerPaciente.paciente.listaMedicamentos}" id="iplistaMedicamentos" />
+
+                    <h:outputLabel value="consultas" for="ipconsultas" />
+                    <h:inputText value="#{controllerPaciente.paciente.consultas}" id="ipconsultas" />
+
+                    <h:outputLabel value="profissao" for="ipprofissao" />
+                    <h:inputText value="#{controllerPaciente.paciente.profissao}" id="ipprofissao" />
+
+                    <h:outputLabel value="sexo" for="ipsexo" />
+                    <h:inputText value="#{controllerPaciente.paciente.sexo}" id="ipsexo" />
+
+                    <h:outputLabel value="telefone" for="iptelefone" />
+                    <h:inputText value="#{controllerPaciente.paciente.telefone}" id="iptelefone" />
+
+                    <h:outputLabel value="utilizaMedicamento" for="iputilizaMedicamento" />
+                    <h:inputText value="#{controllerPaciente.paciente.utilizaMedicamento}" id="iputilizaMedicamento" />
+
+                    <h:outputLabel value="id" for="ipid" />
+                    <h:inputText value="#{controllerPaciente.paciente.id}" id="ipid" />
+
+                </h:panelGrid>
+                <h:commandButton value="Alterar" action="#{controllerPaciente.atualizarPaciente()}" />
+            </h:form>
+        </p:dialog>
+
+
+    </h:body>
+
+</html>

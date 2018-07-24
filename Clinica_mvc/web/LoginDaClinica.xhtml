@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:head>
+
+        <title>modelo da clínica</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <p:graphicImage library="imagem" name="daenerys.jpg" height="610px" width="610px" style="float: left;clear: right"/>
+
+    </h:head>
+
+    <h:body>
+
+
+        <div id="camposlogin" style="border: 5px;background-color: black">
+            <h:form id="form">
+
+                <h1 style="position: absolute;right:15%;top: 15%">Login</h1>
+
+                <h:panelGrid columns="2" style=" position: absolute;right: 10%; top: 25%;" >
+
+                    <p:outputLabel  value="CPF : "/>
+                    <p:inputMask mask="999.999.999-99" value="#{controllerPaciente.paciente.cpf}" requiredMessage="A informação 'CPF' é obrigatória"/>
+
+                    <p:outputLabel  value="Senha : "/>
+                    <p:inputText maxlength="11" type="password" value="#{controllerPaciente.paciente.dataNascimento}" requiredMessage="A informação 'Senha' é obrigatória"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+        <div id="botaologin" style="position: absolute;top: 39%;right: 10%">
+
+            <h:form>
+                <h:commandButton value="Login" actionListener="#{controllerLogin.logar()}" />
+            </h:form>
+
+        </div>
+
+        <div style="position: absolute;top: 39%;right: 19%">
+            <h:form>
+                <p:growl id="growl" life="2000" />
+                <h:commandLink value = "Cadastrar-se" action= "#{controllerAdministrador.paginaCadastroPaciente()}" />
+                <br></br>
+                <h:commandLink value="esqueci meu login e/ou senha" action= "#{controllerAdministrador.paginaAssistente}"/>
+
+            </h:form>
+        </div>
+
+    </h:body>
+
+</html>

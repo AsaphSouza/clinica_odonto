@@ -11,16 +11,17 @@ import org.hibernate.HibernateException;
 @ManagedBean
 @SessionScoped
 public class ControllerAssistente {
+
     private AssistenteModel assistenteModel;
     private Assistente assistente;
     private String nome;
-    
-    public ControllerAssistente () {
-    	assistenteModel = new AssistenteModel();
-    	assistente = new Assistente();
+
+    public ControllerAssistente() {
+        assistenteModel = new AssistenteModel();
+        assistente = new Assistente();
     }
-    
-    public void cadastrarAssitente () {
+
+    public void cadastrarAssitente() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.inserirAssistente(assistente);
@@ -31,8 +32,8 @@ public class ControllerAssistente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         }
     }
-    
-    public void deletarAssistente () {
+
+    public void deletarAssistente() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.deletarAssistente(assistente);
@@ -40,8 +41,8 @@ public class ControllerAssistente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         }
     }
-    
-    public void atualizarAssistente () {
+
+    public void atualizarAssistente() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             assistenteModel.atualizarAssistente(assistente);
@@ -49,39 +50,39 @@ public class ControllerAssistente {
             context.addMessage(null, new FacesMessage(ex.getMessage()));
         }
     }
-    
-    public Assistente buscarPorNome () {
+
+    public Assistente buscarPorNome() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
             return assistenteModel.buscarAssistente(nome);
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage(e.getMessage()));
-            return  null;
+            return null;
         }
     }
 
-	public AssistenteModel getAssistenteModel() {
-		return assistenteModel;
-	}
+    public AssistenteModel getAssistenteModel() {
+        return assistenteModel;
+    }
 
-	public void setAssistenteModel(AssistenteModel assistenteModel) {
-		this.assistenteModel = assistenteModel;
-	}
+    public void setAssistenteModel(AssistenteModel assistenteModel) {
+        this.assistenteModel = assistenteModel;
+    }
 
-	public Assistente getAssistente() {
-		return assistente;
-	}
+    public Assistente getAssistente() {
+        return assistente;
+    }
 
-	public void setAssistente(Assistente assistente) {
-		this.assistente = assistente;
-	}
+    public void setAssistente(Assistente assistente) {
+        this.assistente = assistente;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 }

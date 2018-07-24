@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+    </h:head>
+    
+    <h:body>
+        
+         <h:form>
+
+                <p:messages autoUpdate="true" id="msg" />
+
+                Campos Obrigatórios:*
+                
+                <h2>Dados Pessoais :</h2>
+                
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel  value="Nome : *"/>
+                    <p:inputText value="#{controllerPaciente.paciente.nome}" required="true" requiredMessage="O nome é obrigatório"/>
+
+                    <p:outputLabel  value="Medicamentos : *"/>
+                    <p:inputText value="#{controllerPaciente.paciente.listaMedicamentos}" required="false" requiredMessage="A lista de medicamentos é obrigatória"/>
+
+                    <p:outputLabel  value="Email :"/>
+                    <p:inputText value="#{controllerPaciente.paciente.email}"/>      
+
+                    <p:outputLabel  value="Data de Nascimento : *"/>
+                    <p:inputMask mask="99/99/9999" value="#{controllerPaciente.paciente.dataNascimento}" required="false" requiredMessage="A informação 'data de nascimento' é obrigatória"/>
+
+                    <p:outputLabel  value="CPF : *"/>
+                    <p:inputMask mask="999.999.999-99" value="#{controllerPaciente.paciente.cpf}" requiredMessage="A informação 'CPF' é obrigatória"/>
+
+                    <p:outputLabel  value="Telefone : *"/>
+                    <p:inputMask mask="(99)99999-9999" value="#{controllerPaciente.paciente.telefone}" requiredMessage="A informação 'telefone' é obrigatória"/>
+
+                    <p:outputLabel  value="Profissão : *"/>
+                    <p:inputText value="#{controllerPaciente.paciente.profissao}"/>
+
+                    <p:outputLabel value="Sexo : *"/>
+                    <p:selectOneRadio value="#{controllerPaciente.paciente.sexo}" required="true" requiredMessage="A informação 'Sexo' é obrigatória">
+                        <f:selectItem itemLabel="M" itemValue="Masculino"/>
+                        <f:selectItem itemLabel="F" itemValue="Feminino"/>
+                    </p:selectOneRadio>
+
+               
+
+        <!--</div>-->
+
+        <!--<div id="endereco" style="position: absolute;float: right;top:31%;right:3%">-->
+
+
+
+                    <p:outputLabel value="Bairro: *"/>
+                    <p:inputText value="#{controllerPaciente.endereco.bairro}" required="true" requiredMessage="O Bairro é obrigatório"/>
+
+                    <p:outputLabel value="Cidade: *"/>
+                    <p:inputText value="#{controllerPaciente.endereco.cidade}" required="true" requiredMessage="A cidade é obrigatória"/>
+
+                    <p:outputLabel value="Complemento: *"/>
+                    <p:inputText value="#{controllerPaciente.endereco.complemento}" required="true" requiredMessage="O Complemento é obrigatório"/>
+
+                    <p:outputLabel value="Estado*"/>
+                    <p:inputText value="#{controllerPaciente.endereco.estado}" required="true" requiredMessage="O Estado é obrigatório"/>
+
+                   <p:outputLabel value="Numero: *"/>
+                    <p:inputText value="#{controllerPaciente.endereco.numero}" required="true" requiredMessage="O Numero é obrigatório"/>
+
+                    <p:outputLabel value="País*"/>
+                    <p:inputText value="#{controllerPaciente.endereco.pais}" required="true" requiredMessage="O País é obrigatório"/>
+
+                    <p:outputLabel value="Rua*"/>
+                    <p:inputText value="#{controllerPaciente.endereco.rua}" required="true" requiredMessage="O País é obrigatório"/>
+                    
+                </p:panelGrid>
+                <h:commandButton value="cadastrar" actionListener="#{controllerPaciente.cadastrarPaciente()}" />
+                
+         </h:form>
+        
+        <h:form>
+            <p:commandButton value="voltar" action="#{controllerAdministrador.paginaLogin()}" style="position: absolute;right: 10%;"/>
+        </h:form>
+    </h:body>
+</html>
